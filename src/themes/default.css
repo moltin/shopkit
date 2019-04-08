@@ -1,0 +1,510 @@
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+
+.shopkit {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  margin: 0;
+}
+
+.shopkit h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.shopkit button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button;
+}
+
+/**
+   * Remove the inner border and padding in Firefox.
+   */
+
+.shopkit button::-moz-focus-inner,
+.shopkit [type='button']::-moz-focus-inner,
+.shopkit [type='reset']::-moz-focus-inner,
+.shopkit [type='submit']::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+   * Restore the focus styles unset by the previous rule.
+   */
+
+.shopkit button:-moz-focusring,
+.shopkit [type='button']:-moz-focusring,
+.shopkit [type='reset']:-moz-focusring,
+.shopkit [type='submit']:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+   * Correct the padding in Firefox.
+   */
+
+.shopkit fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+   * 1. Correct the text wrapping in Edge and IE.
+   * 2. Correct the color inheritance from `fieldset` elements in IE.
+   * 3. Remove the padding so developers are not caught out when they zero out
+   *    `fieldset` elements in all browsers.
+   */
+
+.shopkit legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+   * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+   */
+
+.shopkit progress {
+  vertical-align: baseline;
+}
+
+/**
+   * Remove the default vertical scrollbar in IE 10+.
+   */
+
+.shopkit textarea {
+  overflow: auto;
+}
+
+/**
+   * 1. Add the correct box sizing in IE 10.
+   * 2. Remove the padding in IE 10.
+   */
+
+.shopkit [type='checkbox'],
+.shopkit [type='radio'] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+   * Correct the cursor style of increment and decrement buttons in Chrome.
+   */
+
+.shopkit [type='number']::-webkit-inner-spin-button,
+.shopkit [type='number']::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+   * 1. Correct the odd appearance in Chrome and Safari.
+   * 2. Correct the outline style in Safari.
+   */
+
+.shopkit [type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+   * Remove the inner padding in Chrome and Safari on macOS.
+   */
+
+.shopkit [type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+   * 1. Correct the inability to style clickable types in iOS and Safari.
+   * 2. Change font properties to `inherit` in Safari.
+   */
+
+.shopkit ::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+     ========================================================================== */
+
+/*
+   * Add the correct display in Edge, IE 10+, and Firefox.
+   */
+
+.shopkit details {
+  display: block;
+}
+
+/*
+   * Add the correct display in all browsers.
+   */
+
+.shopkit summary {
+  display: list-item;
+}
+
+/* Misc
+     ========================================================================== */
+
+/**
+   * Add the correct display in IE 10+.
+   */
+
+.shopkit template {
+  display: none;
+}
+
+/**
+   * Add the correct display in IE 10.
+   */
+
+.shopkit [hidden] {
+  display: none;
+}
+
+/**
+   * Manually forked from SUIT CSS Base: https://github.com/suitcss/base
+   * A thin layer on top of normalize.css that provides a starting point more
+   * suitable for web applications.
+   */
+
+/**
+   * 1. Prevent padding and border from affecting element width
+   * https://goo.gl/pYtbK7
+   * 2. Change the default font family in all browsers (opinionated)
+   */
+
+.shopkit {
+  box-sizing: border-box; /* 1 */
+  font-family: sans-serif; /* 2 */
+}
+
+.shopkit *,
+.shopkit *::before,
+.shopkit *::after {
+  box-sizing: inherit;
+}
+
+.shopkit button {
+  background: transparent;
+  padding: 0;
+}
+
+/**
+   * Work around a Firefox/IE bug where the transparent `button` background
+   * results in a loss of the default `button` focus styles.
+   */
+
+.shopkit button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+.shopkit fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+.shopkit ol,
+.shopkit ul {
+  margin: 0;
+}
+
+.shopkit *,
+.shopkit *::before,
+.shopkit *::after {
+  border-width: 0;
+  border-style: solid;
+  border-color: config('borderColors.default', currentColor);
+}
+
+.shopkit img {
+  border-style: solid;
+}
+
+.shopkit textarea {
+  resize: vertical;
+}
+
+.shopkit img {
+  max-width: 100%;
+  height: auto;
+}
+
+.shopkit input::placeholder,
+.shopkit textarea::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.shopkit button,
+.shopkit [role='button'] {
+  cursor: pointer;
+}
+
+.shopkit table {
+  border-collapse: collapse;
+}
+
+/* Modal */
+
+.shopkit-overlay {
+  transition: all 0.3s ease;
+  @apply shopkit-bg-default shopkit-fixed shopkit-inset-0 shopkit-z-overlay shopkit-opacity-0 shopkit-invisible shopkit-overflow-x-hidden;
+}
+
+.shopkit-overlay.shopkit-overlay-open {
+  @apply shopkit-opacity-30 shopkit-visible;
+}
+
+.shopkit-modal {
+  transition: all 0.3s ease;
+  @apply shopkit-bg-white shopkit-fixed shopkit-inset-y-0 shopkit-right-0 shopkit-overflow-y-scroll shopkit-h-full shopkit-shadow-2xl shopkit-z-modal shopkit-opacity-0 shopkit-p-6 shopkit-w-full shopkit-invisible shopkit-font-sans shopkit-leading-normal shopkit-text-base shopkit-border-0;
+  max-width: 500px;
+  transform: translateX(525px);
+}
+
+.shopkit-modal.shopkit-modal-open {
+  @apply shopkit-opacity-100 shopkit-visible;
+  transform: translateX(0);
+}
+
+/* Buttons */
+
+.shopkit-btn,
+.shopkit-buy-btn,
+.shopkit-cart-btn,
+.shopkit-login-btn {
+  @apply shopkit-appearance-none shopkit-outline-none shopkit-cursor-pointer shopkit-leading-normal shopkit-text-base shopkit-text-light shopkit-rounded shopkit-antialiased shopkit-leading-tight;
+}
+
+.shopkit button:focus,
+.shopkit button:active {
+  @apply shopkit-outline-none;
+}
+.shopkit-buy-btn,
+.shopkit-cart-btn,
+.shopkit-login-btn {
+  @apply shopkit-bg-primary shopkit-text-white shopkit-px-4 shopkit-py-3 shopkit-rounded-sm shopkit-font-sans shopkit-font-medium shopkit-border-none;
+}
+
+.shopkit-buy-button {
+  @apply shopkit-text-white;
+}
+
+.shopkit-btn.shopkit-primary-btn {
+  @apply shopkit-bg-primary shopkit-text-white shopkit-px-4 shopkit-py-3 shopkit-rounded-sm shopkit-font-sans shopkit-font-medium shopkit-border-none;
+}
+
+.shopkit-btn:disabled {
+  @apply shopkit-opacity-30 shopkit-text-white;
+}
+
+.shopkit-btn:focus {
+  @apply shopkit-outline-none;
+}
+
+.shopkit-btn.block {
+  @apply shopkit-w-full;
+}
+
+/* Cart */
+
+.shopkit-cart--empty {
+  @apply shopkit-text-light shopkit-text-center shopkit-my-6;
+}
+
+/* Cart Item */
+
+.shopkit-cart-item {
+  @apply shopkit-flex shopkit-my-8;
+}
+
+.shopkit-cart-item.shopkit-cart-item--removing {
+  @apply shopkit-opacity-30 shopkit-cursor-not-allowed;
+}
+
+.shopkit-cart-item__photo {
+  @apply shopkit-relative shopkit-mr-4 shopkit-w-16 shopkit-h-16 shopkit-border shopkit-border-lighter shopkit-flex shopkit-items-center shopkit-justify-center shopkit-rounded;
+}
+
+.shopkit-cart-item__photo > img {
+  @apply shopkit-inline-block shopkit-rounded shopkit-w-full;
+}
+
+@screen sm {
+  .shopkit-cart-item__photo {
+    @apply shopkit-w-20 shopkit-h-20;
+  }
+}
+
+.shopkit-cart-item__quantity {
+  @apply shopkit-absolute shopkit-top-0 shopkit-right-0 shopkit-text-sm shopkit-font-medium shopkit--mt-3 shopkit--mr-3 shopkit-bg-primary shopkit-text-white shopkit-rounded-full shopkit-w-6 shopkit-h-6 shopkit-flex shopkit-items-center shopkit-justify-center shopkit-leading-none;
+}
+
+.shopkit-cart-item__info {
+  @apply shopkit-flex shopkit-justify-between shopkit-items-center shopkit-flex-1 shopkit-text-secondary shopkit-m-0;
+}
+
+.shopkit-cart-item__info--name {
+  @apply shopkit-font-medium shopkit-m-0 shopkit-text-base;
+}
+
+.shopkit-cart-item__sku {
+  @apply shopkit-text-light shopkit-text-sm shopkit-m-0;
+}
+
+.shopkit-cart-item__info--total,
+.shopkit-order-item__info--total {
+  @apply shopkit-text-right shopkit-ml-4 shopkit-m-0;
+}
+
+.shopkit-cart-item__info--unit-value,
+.shopkit-order-item__info--unit-value {
+  @apply shopkit-text-light shopkit-text-sm shopkit-m-0;
+}
+
+.shopkit-cart__total {
+  @apply shopkit-py-6 shopkit-flex shopkit-border-t shopkit-border-lighter shopkit-items-center shopkit-justify-between;
+}
+
+.shopkit-cart__total--title,
+.shopkit-order__total--title {
+  @apply shopkit-font-medium shopkit-text-secondary shopkit-text-lg;
+}
+
+.shopkit-cart__total--subtotal,
+.shopkit-order__total--subtotal {
+  @apply shopkit-font-medium shopkit-text-secondary shopkit-text-xl;
+}
+
+/* Forms */
+
+.shopkit-input-group {
+  @apply shopkit-mb-3;
+}
+
+/* Promotion */
+
+.shopkit-cart__promotion {
+  @apply shopkit-mt-6 shopkit-py-6 shopkit-border-t shopkit-border-lighter;
+}
+
+.shopkit-cart__promotion .shopkit-input-group {
+  @apply shopkit-mb-0;
+}
+
+/* Stripe */
+
+.StripeElement {
+  @apply shopkit-border shopkit-border-dark shopkit-rounded shopkit-p-3;
+}
+
+/* Inputs */
+
+.shopkit .shopkit-input,
+.shopkit input,
+.shopkit select {
+  @apply shopkit-block shopkit-appearance-none shopkit-w-full shopkit-text-base shopkit-bg-white shopkit-text-light shopkit-border shopkit-border-dark shopkit-p-3 shopkit-leading-tight shopkit-rounded-none shopkit-rounded;
+}
+
+.shopkit .shopkit-input:focus,
+.shopkit .shopkit-input:active,
+.shopkit input:focus,
+.shopkit input:active {
+  @apply shopkit-outline-none;
+}
+
+.shopkit .shopkit-suggest input::placeholder {
+  @apply shopkit-text-light;
+}
+
+.shopkit .shopkit-error-message {
+  @apply shopkit-text-warning shopkit-text-sm shopkit-inline-block shopkit-mt-2;
+}
+
+/* Algolia Places */
+
+/* .shopkit input {
+  @apply shopkit-block shopkit-border shopkit-border-dark shopkit-rounded shopkit-bg-white shopkit-p-3 shopkit-w-full;
+} */
+
+.shopkit input:focus,
+.shopkit input:active {
+  @apply shopkit-outline-none shopkit-bg-white;
+}
+
+.shopkit .ap-nostyle-dropdown-menu {
+  @apply shopkit-border shopkit-border-light-gray shopkit-bg-white shopkit-shadow shopkit-w-full shopkit-rounded shopkit-mt-1;
+}
+
+.shopkit .ap-nostyle-input-icon {
+  @apply shopkit-block shopkit-absolute shopkit-border-none;
+  background: none;
+}
+
+.shopkit .algolia-places-nostyle {
+  @apply shopkit-w-full;
+}
+.shopkit .ap-nostyle-icon {
+  @apply shopkit-text-light;
+}
+.shopkit .ap-nostyle-icon-pin {
+  @apply shopkit-hidden;
+}
+.shopkit .ap-nostyle-icon-clear {
+  @apply shopkit-right-0 shopkit-top-0 shopkit-mr-3 shopkit-mt-4 shopkit-text-secondary;
+}
+
+.shopkit .ap-nostyle-suggestion {
+  @apply shopkit-p-3 shopkit-border-b shopkit-border-light-gray shopkit-leading-normal shopkit-font-sans shopkit-border-none shopkit-text-light;
+}
+
+.shopkit .ap-nostyle-suggestion-icon {
+  @apply shopkit-hidden;
+}
+
+.shopkit .ap-nostyle-name {
+  @apply shopkit-text-secondary shopkit-text-base shopkit-not-italic;
+}
+
+.shopkit .ap-nostyle-address {
+  @apply shopkit-text-default shopkit-text-xs shopkit-text-light;
+}
+
+.shopkit .ap-nostyle-cursor {
+  @apply shopkit-bg-light-gray;
+}
+
+.shopkit h1,
+h2,
+h3,
+h4,
+p {
+  @apply m-0;
+}
+
+/* Order summary */
+
+.shopkit-order-summary {
+  @apply shopkit-border shopkit-border-light-gray shopkit-rounded shopkit-mt-12 shopkit-mb-0 shopkit-mx-0;
+}
+
+.shopkit-order-summary--title {
+  @apply shopkit-text-default shopkit-text-base shopkit-font-medium shopkit-border-b shopkit-border-light-gray shopkit-p-4;
+}
+
+.shopkit-order-summary--items {
+  @apply shopkit-border-b shopkit-border-light-gray;
+}
+
+.shopkit-order-summary--total {
+  @apply shopkit-p-4 shopkit-flex shopkit-items-center shopkit-justify-between;
+}
