@@ -1,18 +1,17 @@
 import React from 'react'
-import classNames from 'classnames'
+import styled from 'styled-components'
 
-export default function Label({ htmlFor, error, label, children, noMargin }) {
-  const labelClass = classNames(
-    'shopkit-inline-block shopkit-text-default shopkit-font-medium',
-    {
-      'shopkit-text-warning': error,
-      'shopkit-mb-2': !noMargin
-    }
-  )
-
+export default function Label({ htmlFor, label, children, ...props }) {
   return (
-    <label htmlFor={htmlFor} className={labelClass}>
+    <StyledLabel htmlFor={htmlFor} {...props}>
       {children || label}
-    </label>
+    </StyledLabel>
   )
 }
+
+const StyledLabel = styled.label`
+  display: inline-flex;
+  color: ${props => (props.error ? props.theme.error : props.theme.dark)};
+  font-weight: 500;
+  margin: 0.75rem 0;
+`

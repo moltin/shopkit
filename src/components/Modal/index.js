@@ -1,15 +1,15 @@
 import React, { useRef } from 'react'
 import { useStore, useActions } from 'easy-peasy'
 import { StripeProvider, Elements } from 'react-stripe-elements'
-import classNames from 'classnames'
+import styled from 'styled-components'
 
 import useOnClickOutside from '../../hooks/useOnClickOutside'
 import useScript from '../../hooks/useScript'
 
 import Header from './Header'
+import Footer from './Footer'
 import Cart from '../Cart'
 import Checkout from '../Checkout'
-import PoweredBy from '../PoweredBy'
 
 function renderRoute(route) {
   switch (route) {
@@ -20,13 +20,6 @@ function renderRoute(route) {
           <Checkout />
         </Elements>
       )
-
-    case 'login':
-      return <div>Login page!</div>
-
-    case 'orders':
-      return <div>Previous orders page!</div>
-
     case 'cart':
     default:
       return <Cart />
@@ -37,6 +30,7 @@ export default function Modal({ stripeKey }) {
   const { open, route } = useStore(({ modal }) => modal)
   const { closeModal } = useActions(({ modal }) => modal)
   const [stripeLoaded, stripeError] = useScript('https://js.stripe.com/v3')
+
   const ref = useRef()
 
   useOnClickOutside(ref, closeModal)
@@ -50,24 +44,16 @@ export default function Modal({ stripeKey }) {
     return (
       <StripeProvider apiKey={stripeKey}>
         <React.Fragment>
-          <div
-            ref={ref}
-            className={classNames('shopkit shopkit-modal', {
-              'shopkit-modal-open': open
-            })}
-          >
-            <Header route={route} />
+          <StyledModal open={open} ref={ref}>
+            <div>
+              <Header route={route} />
+              {renderRoute(route)}
+            </div>
 
-            {renderRoute(route)}
+            <Footer />
+          </StyledModal>
 
-            <PoweredBy />
-          </div>
-
-          <div
-            className={classNames('shopkit-overlay', {
-              'shopkit-overlay-open': open
-            })}
-          />
+          <ModalOverlay open={open} />
         </React.Fragment>
       </StripeProvider>
     )
@@ -75,3 +61,48 @@ export default function Modal({ stripeKey }) {
 
   return null
 }
+
+const StyledModal = styled.div.attrs({
+  className: 'moltin-shopkit shopkit-modal'
+})`
+  transition: all 0.3s ease;
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow-y: scroll;
+  height: 100%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  z-index: 1000000001;
+  padding: 1.5rem;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-size: 0.9375rem;
+  border-width: 0;
+  max-width: 500px;
+  opacity: ${props => (props.open ? 1 : 0)};
+  visibility: ${props => (props.open ? 'visible' : 'hidden')};
+  transform: translateX(${props => (props.open ? 0 : '525px')});
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+
+const ModalOverlay = styled.div.attrs({
+  className: 'shopkit-modal-overlay'
+})`
+  transition: all 0.3s ease;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000000000;
+  opacity: ${props => (props.open ? 0.3 : 0)};
+  visibility: ${props => (props.open ? 'visible' : 'hidden')};
+  overflow-x: ${props => (props.open ? 100 : 0)};
+`

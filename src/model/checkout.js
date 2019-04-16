@@ -1,9 +1,10 @@
-import { thunk } from 'easy-peasy'
+import { thunk, action } from 'easy-peasy'
 
 import { changeRoute } from '../utils'
 
 export default {
   route: 'shipping',
+  dirty: false,
 
   goToShipping: changeRoute('shipping'),
   goToPayment: changeRoute('payment'),
@@ -66,5 +67,9 @@ export default {
     })
 
     return payment
+  }),
+
+  setDirty: action((state, dirty) => {
+    state.dirty = dirty
   })
 }

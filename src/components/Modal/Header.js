@@ -1,18 +1,31 @@
 import React from 'react'
-import { useActions } from 'easy-peasy'
+import { useActions, useStore } from 'easy-peasy'
+import styled from 'styled-components'
+
+import Button from '../Button'
 
 export default function Header({ route }) {
   const { closeModal, goToCart, goToShipping } = useActions(
     ({ modal }) => modal
   )
+  const { dirty } = useStore(({ checkout }) => checkout)
 
-  const handleClick = () => {
+  const handleClick = async () => {
     switch (route) {
       case 'billing':
         return goToShipping()
 
-      case 'shipping':
+      case 'shipping': {
+        if (dirty) {
+          const proceed = confirm(
+            'Are you sure you want to abandon your checkout?'
+          )
+
+          if (!proceed) return false
+        }
+
         return goToCart()
+      }
 
       default:
         return closeModal()
@@ -20,15 +33,12 @@ export default function Header({ route }) {
   }
 
   return (
-    <header className="relative">
-      <button onClick={handleClick} className="shopkit-btn">
+    <StyledHeader>
+      <ActionButton onClick={handleClick}>
         {route === 'shipping' || route === 'billing' ? (
-          <svg
-            className="shopkit-fill-current shopkit-w-3 shopkit-h-3"
+          <SVG
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            width="14"
-            height="14"
             viewBox="0 0 14 14"
           >
             <defs>
@@ -42,14 +52,11 @@ export default function Header({ route }) {
               transform="translate(-9 -9)"
               xlinkHref="#back-a"
             />
-          </svg>
+          </SVG>
         ) : (
-          <svg
-            className="shopkit-fill-current shopkit-w-3 shopkit-h-3"
+          <SVG
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
-            width="10"
-            height="10"
             viewBox="0 0 10 10"
           >
             <defs>
@@ -63,12 +70,34 @@ export default function Header({ route }) {
               transform="translate(-11 -11)"
               xlinkHref="#cross2-a"
             />
-          </svg>
+          </SVG>
         )}
-      </button>
+      </ActionButton>
 
       {/* <button onClick={goToCart}>Cart ({count})</button>
             <button onClick={goToOrders}>Previous Orders</button> */}
-    </header>
+    </StyledHeader>
   )
 }
+
+const StyledHeader = styled.header`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const ActionButton = styled(Button)`
+  background-color: transparent;
+  padding: 0.25rem;
+`
+
+const SVG = styled.svg`
+  fill: currentColor;
+  width: 12px;
+  height: 12px;
+`
+
+export const RouteHeader = styled.div`
+  text-align: center;
+  margin-bottom: 1.5rem;
+`

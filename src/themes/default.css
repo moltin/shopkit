@@ -264,17 +264,17 @@
   @apply shopkit-opacity-30 shopkit-visible;
 }
 
-.shopkit-modal {
+/* .shopkit-modal {
   transition: all 0.3s ease;
   @apply shopkit-bg-white shopkit-fixed shopkit-inset-y-0 shopkit-right-0 shopkit-overflow-y-scroll shopkit-h-full shopkit-shadow-2xl shopkit-z-modal shopkit-opacity-0 shopkit-p-6 shopkit-w-full shopkit-invisible shopkit-font-sans shopkit-leading-normal shopkit-text-base shopkit-border-0;
   max-width: 500px;
   transform: translateX(525px);
-}
+} */
 
-.shopkit-modal.shopkit-modal-open {
+/* .shopkit-modal.shopkit-modal-open {
   @apply shopkit-opacity-100 shopkit-visible;
   transform: translateX(0);
-}
+} */
 
 /* Buttons */
 

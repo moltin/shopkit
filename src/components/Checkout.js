@@ -1,14 +1,33 @@
 import React, { useState } from 'react'
 import { useStore, useActions } from 'easy-peasy'
-import { Form, Field } from 'react-final-form'
+import { Form } from 'react-final-form'
 import { CardElement, injectStripe } from 'react-stripe-elements'
+import styled from 'styled-components'
 
 import { shippingValidation, billingValidation } from '../validation/checkout'
+import { RouteHeader } from './Modal/Header'
+import { Heading } from './typography'
 import AddressFields from './AddressFields'
 import Label from './Label'
-import Input from './Input'
+import Input, { ErrorAlert } from './Input'
 import Checkbox from './Checkbox'
+import { PrimaryButton } from './Button'
 import OrderConfirmation from './OrderConfirmation'
+
+const Wrapper = styled.div`
+  margin-top: 0.5rem;
+  border-top: 1px solid ${props => props.theme.divider};
+  padding: 0.75rem 0 1.5rem;
+`
+
+const StripeInput = styled.div`
+  .StripeElement {
+    background-color: ${props => props.theme.white};
+    border: 1px solid ${props => props.theme.border};
+    border-radius: 0.25rem;
+    padding: 0.75rem 1rem;
+  }
+`
 
 function Checkout({ stripe }) {
   const [initialValues, setInitialValues] = useState({
@@ -18,7 +37,9 @@ function Checkout({ stripe }) {
   const [order, setOrder] = useState(null)
   const { route } = useStore(({ modal }) => modal)
   const { id: cartId, subTotal } = useStore(({ cart }) => cart)
-  const { createOrder, payForOrder } = useActions(({ checkout }) => checkout)
+  const { createOrder, payForOrder, setDirty } = useActions(
+    ({ checkout }) => checkout
+  )
   const { goToBilling } = useActions(({ modal }) => modal)
   const { deleteCart } = useActions(({ cart }) => cart)
 
@@ -85,7 +106,7 @@ function Checkout({ stripe }) {
     <OrderConfirmation order={order} />
   ) : (
     <Form onSubmit={onSubmit} initialValues={initialValues} validate={validate}>
-      {({ handleSubmit, submitting, invalid, values, form }) => {
+      {({ handleSubmit, submitting, invalid, values, form, pristine }) => {
         if (
           !values.createCustomer &&
           values.customer &&
@@ -98,18 +119,17 @@ function Checkout({ stripe }) {
           delete values.billing_address
         }
 
-        const countryCode =
-          values && values.billing_address && values.billing_address.country
-
         const onStripeChange = e => form.change('stripe', e)
+
+        setDirty(!pristine)
 
         return (
           <form onSubmit={handleSubmit}>
             {route === 'shipping' ? (
               <div>
-                <h2 className="shopkit-w-full shopkit-text-center shopkit-text-default shopkit-text-lg shopkit-font-medium shopkit-mt-2 shopkit-mb-6 shopkit-block">
-                  Shipping information
-                </h2>
+                <RouteHeader>
+                  <Heading>Shipping information</Heading>
+                </RouteHeader>
 
                 <div>
                   <AddressFields
@@ -120,20 +140,20 @@ function Checkout({ stripe }) {
                 </div>
 
                 <div className="shopkit-mt-6">
-                  <button
-                    className="shopkit-btn shopkit-primary-btn block"
+                  <PrimaryButton
+                    block
                     disabled={submitting || invalid}
                     type="submit"
                   >
                     Continue to billing information
-                  </button>
+                  </PrimaryButton>
                 </div>
               </div>
             ) : (
               <div>
-                <h2 className="shopkit-w-full shopkit-text-center shopkit-text-default shopkit-text-lg shopkit-font-medium shopkit-mt-2 shopkit-mb-6 shopkit-block">
-                  Billing information
-                </h2>
+                <RouteHeader>
+                  <Heading>Billing information</Heading>
+                </RouteHeader>
 
                 <div>
                   <Checkbox
@@ -150,7 +170,7 @@ function Checkout({ stripe }) {
                   )}
                 </div>
 
-                <div className="shopkit-my-2 shopkit-py-4 shopkit-border-t shopkit-border-b shopkit-border-lighter">
+                <Wrapper>
                   <Input
                     type="email"
                     name="customer.email"
@@ -158,7 +178,7 @@ function Checkout({ stripe }) {
                     autoFocus
                   />
 
-                  <div>
+                  <StripeInput>
                     <Label htmlFor="payment">Payment card</Label>
                     <CardElement
                       onChange={onStripeChange}
@@ -166,10 +186,10 @@ function Checkout({ stripe }) {
                       id="payment"
                       style={{
                         base: {
-                          color: '#333333',
+                          color: '#273142',
                           fontFamily:
-                            '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                          fontSize: '1rem',
+                            '-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                          fontSize: '15px',
                           '::placeholder': {
                             color: '#58697F'
                           }
@@ -183,14 +203,12 @@ function Checkout({ stripe }) {
                       }}
                     />
                     {values.stripe && values.stripe.error && (
-                      <span className="shopkit-error-message">
-                        {values.stripe.error.message}
-                      </span>
+                      <ErrorAlert>{values.stripe.error.message}</ErrorAlert>
                     )}
-                  </div>
-                </div>
+                  </StripeInput>
+                </Wrapper>
 
-                <div>
+                <Wrapper>
                   <Checkbox
                     name="createCustomer"
                     label="Save this information for next time"
@@ -203,16 +221,16 @@ function Checkout({ stripe }) {
                       label="Password"
                     />
                   )}
-                </div>
+                </Wrapper>
 
                 <div>
-                  <button
-                    className="shopkit-btn shopkit-primary-btn block"
+                  <PrimaryButton
+                    block
                     disabled={submitting || invalid}
                     type="submit"
                   >
-                    Place order and pay {subTotal}
-                  </button>
+                    Pay {subTotal}
+                  </PrimaryButton>
                 </div>
               </div>
             )}

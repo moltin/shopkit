@@ -1,13 +1,15 @@
 import React from 'react'
 import { useActions } from 'easy-peasy'
 
+import { PrimaryButton } from './Button'
+
 function LoginButton({ text }) {
   const { goToLogin } = useActions(({ modal }) => modal)
 
   return (
-    <button className="shopkit-btn shopkit-login-btn" onClick={goToLogin}>
+    <PrimaryButton className="shopkit-login-button" onClick={goToLogin}>
       {text}
-    </button>
+    </PrimaryButton>
   )
 }
 

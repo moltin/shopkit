@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 
 import Promotion from './Promotion'
 import Form from './Form'
@@ -12,12 +13,18 @@ export default function PromotionManager({
   const [promotion] = promotionItems
 
   return (
-    <div className="shopkit-cart__promotion">
+    <Wrapper>
       {hasPromotion ? (
         <Promotion removePromotion={removePromotion} {...promotion} />
       ) : (
         <Form addPromotion={addPromotion} />
       )}
-    </div>
+    </Wrapper>
   )
 }
+
+const Wrapper = styled.div`
+  margin: 0;
+  padding: 0.75rem 0 1.5rem;
+  border-top: 1px solid ${props => props.theme.divider};
+`

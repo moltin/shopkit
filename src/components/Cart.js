@@ -1,7 +1,12 @@
 import React from 'react'
 import { useStore, useActions } from 'easy-peasy'
+import styled from 'styled-components'
 
+import { PrimaryButton } from './Button'
+import { Heading } from './typography'
 import CartItemList from './CartItemList'
+import { RouteHeader } from './Modal/Header'
+import { pluralize } from '../utils'
 
 export default function Cart() {
   const { isEmpty, cartItems, promotionItems, subTotal, count } = useStore(
@@ -10,13 +15,13 @@ export default function Cart() {
   const { goToShipping } = useActions(({ modal }) => modal)
 
   return (
-    <div className="shopkit-cart">
-      <h2 className="shopkit-w-full shopkit-text-center shopkit-text-default shopkit-text-lg shopkit-font-medium shopkit-mt-2 shopkit-mb-6 shopkit-block">
-        Your shopping cart
-      </h2>
+    <StyledCart>
+      <RouteHeader>
+        <Heading>Your shopping cart</Heading>
+      </RouteHeader>
 
       {isEmpty ? (
-        <p className="shopkit-cart--empty">Your cart is empty</p>
+        <CartEmpty>Your cart is empty</CartEmpty>
       ) : (
         <React.Fragment>
           <CartItemList
@@ -27,23 +32,48 @@ export default function Cart() {
 
           {!isEmpty && (
             <React.Fragment>
-              <div className="shopkit-cart__total">
-                <span className="shopkit-cart__total--title">Total</span>
-                <span className="shopkit-cart__total--subtotal">
-                  {subTotal}
-                </span>
-              </div>
+              <CartTotalRow>
+                <CartTotalTitle>Total</CartTotalTitle>
+                <CartTotalSubTotal>{subTotal}</CartTotalSubTotal>
+              </CartTotalRow>
 
-              <button
-                className="shopkit-btn shopkit-primary-btn block"
-                onClick={goToShipping}
-              >
-                Checkout with {count} items
-              </button>
+              <PrimaryButton block large onClick={goToShipping}>
+                Checkout with {pluralize(count, 'item')}
+              </PrimaryButton>
             </React.Fragment>
           )}
         </React.Fragment>
       )}
-    </div>
+    </StyledCart>
   )
 }
+
+const StyledCart = styled.div.attrs({
+  className: 'moltin-shopkit shopkit-cart'
+})``
+
+const CartEmpty = styled.p`
+  color: ${props => props.theme.dark};
+  text-align: center;
+  margin: 1.5rem 0;
+`
+
+const CartTotalRow = styled.div`
+  border-top: 1px solid ${props => props.theme.divider};
+  padding: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const CartTotalTitle = styled.span`
+  color: ${props => props.theme.dark};
+  font-weight: 500;
+  font-size: ${props => props.theme.textLarge};
+`
+
+const CartTotalSubTotal = styled.span`
+  color: ${props => props.theme.dark};
+  font-weight: 500;
+  font-size: ${props => props.theme.textExtraLarge};
+`

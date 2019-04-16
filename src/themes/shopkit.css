@@ -1,0 +1,30 @@
+.moltin-shopkit,
+.moltin-buy-button,
+.moltin-cart-button,
+.moltin-login-button {
+  box-sizing: border-box;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, Noto Sans, sans-serif;
+  font-size: 15px;
+}
+
+.moltin-shopkit *,
+.moltin-shopkit *::before,
+.moltin-shopkit *::after {
+  box-sizing: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+.moltin-shopkit [type='checkbox'],
+.moltin-shopkit [type='radio'] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+.moltin-shopkit [type='number']::-webkit-inner-spin-button,
+.moltin-shopkit [type='number']::-webkit-outer-spin-button {
+  height: auto;
+}

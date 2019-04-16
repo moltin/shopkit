@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { useStore, useActions } from 'easy-peasy'
 import { createCartIdentifier } from '@moltin/request'
 
+import { PrimaryButton } from './Button'
+
 import useLocalStorage from '../hooks/useLocalStorage'
 
 function CartButton({ moltinText, moltinShowTotal }) {
@@ -12,8 +14,8 @@ function CartButton({ moltinText, moltinShowTotal }) {
   } = useActions(actions => actions)
 
   const [cartId, setCartId] = useLocalStorage('mcart', createCartIdentifier())
-  const [customerToken, setCustomerToken] = useLocalStorage('mtoken', null)
-  const [customerId, setCustomerId] = useLocalStorage('mcustomer', null)
+  // const [customerToken, setCustomerToken] = useLocalStorage('mtoken', null)
+  // const [customerId, setCustomerId] = useLocalStorage('mcustomer', null)
 
   const btnSuffix =
     subTotal || count
@@ -21,15 +23,16 @@ function CartButton({ moltinText, moltinShowTotal }) {
       : null
 
   useEffect(() => {
-    initialize({ cartId, customerToken, customerId })
+    // initialize({ cartId, customerToken, customerId })
+    initialize({ cartId })
     setCartId(cartId)
   }, [cartId])
 
   return (
-    <button className="shopkit-btn shopkit-cart-btn" onClick={goToCart}>
+    <PrimaryButton className="shopkit-cart-button" onClick={goToCart}>
       {moltinText}
       {btnSuffix}
-    </button>
+    </PrimaryButton>
   )
 }
 

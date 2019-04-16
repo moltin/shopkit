@@ -76,7 +76,7 @@ export default {
         quantity
       })
 
-      actions.setCart(payload)
+      await actions.setCart(payload)
     }
   ),
 
@@ -92,12 +92,16 @@ export default {
     async (actions, code, { getState, injections: { api } }) => {
       const { id: cartId } = getState()
 
-      const payload = await api.post(`carts/${cartId}/items`, {
-        type: 'promotion_item',
-        code
-      })
+      try {
+        const payload = await api.post(`carts/${cartId}/items`, {
+          type: 'promotion_item',
+          code
+        })
 
-      actions.setCart(payload)
+        actions.setCart(payload)
+      } catch ({ statusCode }) {
+        throw new Error('Code expired or invalid')
+      }
     }
   )
 }

@@ -1,10 +1,27 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 
+import { TextButton } from './Button'
 import Input from './Input'
 import Select from './Select'
 import PlacesSuggest from './PlacesSuggest'
+import { Grid, GridCol } from './Grid'
 
 import countryOptions from '../countries'
+
+const SearchWrapper = styled.div`
+  padding: 0 0 1.5rem;
+`
+
+const FieldsWrapper = styled.div`
+  border-top: 1px solid ${props => props.theme.divider};
+  padding: 0.75rem 0 1.5rem;
+`
+
+const StyledTextButton = styled(TextButton)`
+  margin-top: 0.5rem !important;
+  display: inline-block !important;
+`
 
 export default function AddressFields({
   isEditing = false,
@@ -12,8 +29,8 @@ export default function AddressFields({
   form
 }) {
   const [editing, setEditing] = useState(isEditing)
-
   const type = `${shortType}_address`
+  const isShipping = shortType === 'shipping'
 
   function onPlacesChange(type, { name, city, county, countryCode, postcode }) {
     form.change(`${type}.line_1`, name)
@@ -33,8 +50,7 @@ export default function AddressFields({
 
   return (
     <React.Fragment>
-      {/* <div> */}
-      {!editing && (
+      <SearchWrapper>
         <PlacesSuggest
           label={shortType}
           onChange={({ suggestion }) => {
@@ -43,75 +59,75 @@ export default function AddressFields({
           }}
           onClear={() => onPlacesClear(type)}
         />
-      )}
 
-      {/* <button onClick={() => setEditing(true)}>Enter address manually</button> */}
-      {/* </div> */}
+        {!editing && (
+          <StyledTextButton onClick={() => setEditing(true)}>
+            Enter address manually
+          </StyledTextButton>
+        )}
+      </SearchWrapper>
 
       {editing && (
-        <React.Fragment>
-          <div className="md:shopkit-flex shopkit--mx-2">
-            <div className="shopkit-w-full shopkit-px-2">
+        <FieldsWrapper>
+          <Grid>
+            <GridCol>
               <Input
                 autoFocus
                 name={`${type}.first_name`}
                 label="First name"
                 required
               />
-            </div>
+            </GridCol>
 
-            <div className="shopkit-w-full shopkit-px-2">
+            <GridCol>
               <Input name={`${type}.last_name`} label="Last name" required />
-            </div>
-          </div>
+            </GridCol>
+          </Grid>
 
-          {/* <button onClick={() => setEditing(false)}>Select new address</button> */}
-          <div className="md:shopkit-flex shopkit--mx-2">
-            <div className="shopkit-w-full shopkit-px-2">
-              <Input name={`${type}.line_1`} label="Address line 1" required />
-            </div>
-          </div>
+          <Input name={`${type}.line_1`} label="Address line 1" required />
+          <Input name={`${type}.line_2`} label="Address line 2" />
 
-          <div className="md:shopkit-flex shopkit--mx-2">
-            <div className="shopkit-w-full shopkit-px-2">
-              <Input name={`${type}.line_2`} label="Address line 2" />
-            </div>
-          </div>
-
-          <div className="md:shopkit-flex shopkit--mx-2">
-            <div className="shopkit-w-full shopkit-px-2">
+          <Grid>
+            <GridCol>
               <Input name={`${type}.city`} label="City" required />
-            </div>
-          </div>
+            </GridCol>
 
-          <div className="md:shopkit-flex shopkit--mx-2">
-            <div className="shopkit-w-full shopkit-px-2">
-              <Input
-                name={`${type}.county`}
-                label="State / County / Region"
-                required
-              />
-            </div>
+            <GridCol>
+              <Input name={`${type}.county`} label="State / County" required />
+            </GridCol>
+          </Grid>
 
-            <div className="shopkit-w-full shopkit-px-2">
+          <Grid>
+            <GridCol>
               <Input
                 name={`${type}.postcode`}
                 label="ZIP / Postcode"
                 required
               />
-            </div>
-          </div>
+            </GridCol>
 
-          <div className="md:shopkit-flex shopkit--mx-2">
-            <div className="shopkit-w-full shopkit-px-2">
+            <GridCol>
               <Select
                 name={`${type}.country`}
                 label="Country"
                 options={countryOptions}
+                required
               />
-            </div>
-          </div>
-        </React.Fragment>
+            </GridCol>
+          </Grid>
+
+          {isShipping && (
+            <React.Fragment>
+              <Input name={`${type}.phone_number`} label="Phone number" />
+
+              <Input
+                name={`${type}.instructions`}
+                label="Delivery instructions"
+                placeholder="E.g. Leave in garage"
+              />
+            </React.Fragment>
+          )}
+        </FieldsWrapper>
       )}
     </React.Fragment>
   )

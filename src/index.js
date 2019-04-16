@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createClient } from '@moltin/request'
 import { createStore, StoreProvider } from 'easy-peasy'
+import { ThemeProvider } from 'styled-components'
 
 import model from './model'
 
@@ -10,7 +11,9 @@ import BuyButton from './components/BuyButton'
 import CartButton from './components/CartButton'
 import LoginButton from './components/LoginButton'
 
-import './themes/default.css'
+import './themes/shopkit.css'
+
+import theme from './theme'
 
 function init(document) {
   const script = document.querySelector('script[data-moltin-client-id]')
@@ -35,9 +38,9 @@ function init(document) {
     return
   }
 
-  const buttons = [...document.querySelectorAll('.moltin-buy-btn')]
-  const cartBtns = [...document.querySelectorAll('.moltin-cart-btn')]
-  const loginBtns = [...document.querySelectorAll('.moltin-login-btn')]
+  const buttons = [...document.querySelectorAll('.moltin-buy-button')]
+  const cartBtns = [...document.querySelectorAll('.moltin-cart-button')]
+  const loginBtns = [...document.querySelectorAll('.moltin-login-button')]
 
   const cart = document.createElement('div')
   document.body.appendChild(cart)
@@ -57,7 +60,9 @@ function init(document) {
   buttons.forEach(el =>
     ReactDOM.render(
       <StoreProvider store={store}>
-        <BuyButton {...el.dataset} />
+        <ThemeProvider theme={theme}>
+          <BuyButton {...el.dataset} />
+        </ThemeProvider>
       </StoreProvider>,
       el
     )
@@ -66,7 +71,9 @@ function init(document) {
   cartBtns.forEach(el => {
     ReactDOM.render(
       <StoreProvider store={store}>
-        <CartButton {...el.dataset} />
+        <ThemeProvider theme={theme}>
+          <CartButton {...el.dataset} />
+        </ThemeProvider>
       </StoreProvider>,
       el
     )
@@ -75,7 +82,9 @@ function init(document) {
   loginBtns.forEach(el => {
     ReactDOM.render(
       <StoreProvider store={store}>
-        <LoginButton {...el.dataset} />
+        <ThemeProvider theme={theme}>
+          <LoginButton {...el.dataset} />
+        </ThemeProvider>
       </StoreProvider>,
       el
     )
@@ -83,7 +92,9 @@ function init(document) {
 
   ReactDOM.render(
     <StoreProvider store={store}>
-      <Modal stripeKey={moltinStripePublishableKey} />
+      <ThemeProvider theme={theme}>
+        <Modal stripeKey={moltinStripePublishableKey} />
+      </ThemeProvider>
     </StoreProvider>,
     cart
   )

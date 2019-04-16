@@ -1,6 +1,8 @@
 import React from 'react'
 import { useActions } from 'easy-peasy'
 
+import { PrimaryButton } from './Button'
+
 function BuyButton({
   moltinProductId,
   moltinOpenCart,
@@ -32,9 +34,9 @@ function BuyButton({
   }
 
   return (
-    <button className="shopkit-btn shopkit-buy-btn" onClick={add}>
+    <PrimaryButton className="shopkit-buy-button" onClick={add}>
       {moltinText}
-    </button>
+    </PrimaryButton>
   )
 }
 

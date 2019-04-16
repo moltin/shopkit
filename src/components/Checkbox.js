@@ -1,6 +1,46 @@
 import React from 'react'
 import { Field } from 'react-final-form'
-import classNames from 'classnames'
+import styled from 'styled-components'
+
+import Label from './Label'
+
+const CheckWrapper = styled.div`
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 0 0.5rem 0 0;
+`
+
+const StyledCheckbox = styled.input.attrs({
+  type: 'checkbox'
+})`
+  appearance: none;
+  background-color: ${props => props.theme.primary};
+  border-radius: 0.25rem;
+  border: 0;
+  outline: none;
+  padding: 0.25rem;
+  font-size: ${props => props.theme.textBase};
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+`
+
+const CheckmarkBox = styled.span`
+  display: flex;
+  position: absolute;
+  color: ${props => props.theme.white};
+  align-items: center;
+  justify-content: center;
+`
+
+const Checkmark = styled.svg`
+  fill: currentColor;
+  height: 12px;
+`
 
 export default function Checkbox({ label, name, checked, ...props }) {
   return (
@@ -9,49 +49,36 @@ export default function Checkbox({ label, name, checked, ...props }) {
         const error = meta.error && meta.touched
         const checked = input.value
 
-        const labelClass = classNames(
-          'shopkit-my-4 shopkit-inline-flex shopkit-text-default shopkit-cursor-pointer',
-          {
-            'shopkit-text-warning': error
-          }
-        )
-
-        const checkboxClass = classNames(
-          'shopkit-appearance-none shopkit-border-none shopkit-outline-none shopkit-p-2 shopkit-relative shopkit-bg-primary shopkit-cursor-pointer shopkit-rounded shopkit-text-base',
-          {
-            // 'shopkit-bg-red shopkit-text-white': error
-          }
-        )
-
         return (
-          <label htmlFor={name} error={error} className={labelClass}>
-            <div className="shopkit-flex shopkit-items-center shopkit-justify-center shopkit-mr-3 shopkit-relative shopkit-text-base">
-              <input
-                type="checkbox"
-                id={name}
-                name={name}
-                className={checkboxClass}
-                {...input}
-              />
+          <Label htmlFor={name} error={error} className={labelClass}>
+            <CheckWrapper>
+              <StyledCheckbox id={name} name={name} {...input} />
               {checked && (
-                <span className="shopkit-absolute shopkit-text-white shopkit-flex shopkit-items-center shopkit-justify-center">
-                  <svg
+                <CheckmarkBox>
+                  <Checkmark
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 10 7"
-                    className="shopkit-w-3 shopkit-h-4 shopkit-stroke-current"
+                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                    width="10"
+                    height="8"
+                    viewBox="0 0 10 8"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 1L3.5 6 1 3.727"
+                    <defs>
+                      <path
+                        id="checkmark-a"
+                        d="M3.73843172,9.39326445 L1.24436482,6.84988183 C0.918545061,6.51761957 0.918545061,5.98056138 1.24436482,5.64829912 C1.57018458,5.31603686 2.0968293,5.31603686 2.42264906,5.64829912 L4.33340277,7.59683459 L9.57735094,2.2491967 C9.9031707,1.91693443 10.4298154,1.91693443 10.7556352,2.2491967 C11.0814549,2.58145896 11.0814549,3.11851714 10.7556352,3.4507794 L4.92837383,9.39326445 C4.60615176,9.72185789 4.07856154,9.72702291 3.7499681,9.40480083 C3.74608509,9.40099311 3.74223944,9.39714747 3.73843172,9.39326445 Z"
+                      />
+                    </defs>
+                    <use
+                      fillRule="evenodd"
+                      transform="translate(-1 -2)"
+                      xlinkHref="#checkmark-a"
                     />
-                  </svg>
-                </span>
+                  </Checkmark>
+                </CheckmarkBox>
               )}
-            </div>
+            </CheckWrapper>
             {label}
-          </label>
+          </Label>
         )
       }}
     </Field>
