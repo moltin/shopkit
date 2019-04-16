@@ -77,10 +77,7 @@ const StyledModal = styled.div.attrs({
   z-index: 1000000001;
   padding: 1.5rem;
   width: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  font-size: 0.9375rem;
+  // font-size: 0.9375rem;
   border-width: 0;
   max-width: 500px;
   opacity: ${props => (props.open ? 1 : 0)};
@@ -89,6 +86,21 @@ const StyledModal = styled.div.attrs({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  box-sizing: border-box;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, Noto Sans, sans-serif;
+  font-size: 15px;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+    -webkit-font-smoothing: antialiased;
+  }
 `
 
 const ModalOverlay = styled.div.attrs({

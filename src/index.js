@@ -11,8 +11,6 @@ import BuyButton from './components/BuyButton'
 import CartButton from './components/CartButton'
 import LoginButton from './components/LoginButton'
 
-import './themes/shopkit.css'
-
 import theme from './theme'
 
 function init(document) {

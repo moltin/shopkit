@@ -1,7 +1,4 @@
-const path = require('path')
-const TerserJSPlugin = require('terser-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const { join, resolve } = require('path')
 
 const { NODE_ENV } = process.env
 
@@ -11,7 +8,7 @@ module.exports = {
   mode: devMode ? 'development' : 'production',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'example'),
+    contentBase: join(__dirname, 'example'),
     compress: true,
     port: 3000,
     open: true,
@@ -26,28 +23,14 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
-      },
-      {
-        test: /\.css$/,
-        use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader'
-        ]
       }
     ]
   },
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'embed.js'
-  },
-  optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
-    })
-  ]
+    path: resolve(__dirname, 'dist'),
+    filename: 'index.js'
+  }
 }

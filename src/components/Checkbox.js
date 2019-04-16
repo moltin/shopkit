@@ -50,7 +50,7 @@ export default function Checkbox({ label, name, checked, ...props }) {
         const checked = input.value
 
         return (
-          <Label htmlFor={name} error={error} className={labelClass}>
+          <Label htmlFor={name} error={error}>
             <CheckWrapper>
               <StyledCheckbox id={name} name={name} {...input} />
               {checked && (

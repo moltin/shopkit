@@ -83,8 +83,6 @@ function Checkout({ stripe }) {
         address_zip: shipping_address.postcode,
         address_country: shipping_address.country
       })
-
-      // console.log(token)
     } catch (tokenError) {
       console.log('Failed to create token', tokenError)
     }

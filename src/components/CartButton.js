@@ -3,7 +3,7 @@ import { useStore, useActions } from 'easy-peasy'
 import { createCartIdentifier } from '@moltin/request'
 
 import { PrimaryButton } from './Button'
-
+import { pluralize } from '../utils'
 import useLocalStorage from '../hooks/useLocalStorage'
 
 function CartButton({ moltinText, moltinShowTotal }) {
@@ -19,7 +19,7 @@ function CartButton({ moltinText, moltinShowTotal }) {
 
   const btnSuffix =
     subTotal || count
-      ? ` (${moltinShowTotal ? subTotal : `${count} items`})`
+      ? ` (${moltinShowTotal ? subTotal : pluralize(count, 'item')})`
       : null
 
   useEffect(() => {
