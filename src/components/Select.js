@@ -76,13 +76,13 @@ const SVG = styled.svg`
   height: 12px;
 `
 
-const CustomSelect = ({ label, input, meta, options }) => {
+const CustomSelect = ({ label, input, meta, options, required }) => {
   const error = meta.error && meta.touched
 
   return (
     <SelectGroup>
       {label && (
-        <Label htmlFor={name} error={error}>
+        <Label htmlFor={name} error={error} required={required}>
           {label}
         </Label>
       )}

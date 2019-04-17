@@ -9,6 +9,7 @@ export default function Header({ route }) {
     ({ modal }) => modal
   )
   const { dirty, completed } = useStore(({ checkout }) => checkout)
+  const { loggedIn } = useStore(({ user }) => user)
 
   const handleClick = async () => {
     switch (route) {
@@ -77,6 +78,8 @@ export default function Header({ route }) {
           </SVG>
         )}
       </ActionButton>
+
+      {loggedIn && <p>Logged in</p>}
 
       {/* <button onClick={goToCart}>Cart ({count})</button>
             <button onClick={goToOrders}>Previous Orders</button> */}

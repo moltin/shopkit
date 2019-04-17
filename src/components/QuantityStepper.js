@@ -46,7 +46,7 @@ export default function QuantityStepper({ itemId, quantity, updateItem }) {
         </SVG>
       </Button>
       <Quantity>{quantity}</Quantity>
-      <Button noPadding onClick={decrease}>
+      <Button noPadding onClick={decrease} disabled={quantity === 1}>
         <SVG
           xmlns="http://www.w3.org/2000/svg"
           width="10"
