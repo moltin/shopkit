@@ -8,11 +8,20 @@ import useScript from '../../hooks/useScript'
 
 import Header from './Header'
 import Footer from './Footer'
+import LoginForm from '../LoginForm'
+import OrderList from '../OrderList'
 import Cart from '../Cart'
 import Checkout from '../Checkout'
 
 function renderRoute(route) {
   switch (route) {
+    case 'login':
+      return <LoginForm />
+
+    case 'orders': {
+      return <OrderList />
+    }
+
     case 'shipping':
     case 'billing':
       return (
@@ -20,6 +29,7 @@ function renderRoute(route) {
           <Checkout />
         </Elements>
       )
+
     case 'cart':
     default:
       return <Cart />

@@ -11,6 +11,7 @@ export default function Input({
   type,
   placeholder,
   error: propsError,
+  required,
   ...props
 }) {
   return (
@@ -21,7 +22,7 @@ export default function Input({
         return (
           <InputGroup>
             {label && (
-              <Label htmlFor={name} error={error}>
+              <Label htmlFor={name} error={error} required={required}>
                 {label}
               </Label>
             )}

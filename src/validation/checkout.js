@@ -1,3 +1,5 @@
+import { validateEmail } from '../utils'
+
 export const shippingValidation = values => {
   const errors = {}
 
@@ -137,17 +139,17 @@ export const billingValidation = values => {
     errors.customer.email = 'Required'
   }
 
-  // if (
-  //   values.customer &&
-  //   values.customer.email &&
-  //   !IsEmail(values.customer.email)
-  // ) {
-  //   if (!errors.customer) {
-  //     errors.customer = {}
-  //   }
+  if (
+    values.customer &&
+    values.customer.email &&
+    !validateEmail(values.customer.email)
+  ) {
+    if (!errors.customer) {
+      errors.customer = {}
+    }
 
-  //   errors.customer.email = 'Provide a valid email'
-  // }
+    errors.customer.email = 'Invalid email'
+  }
 
   if (
     values.createCustomer &&

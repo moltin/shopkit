@@ -5,6 +5,7 @@ const theme = {
   border: '#C5CCD6',
   divider: '#D8DFEB',
   error: '#E62F17',
+  success: '#5FC8AA',
   white: '#fff',
   placeholder: '#58697F',
   cursor: '#E9EBF0',

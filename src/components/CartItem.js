@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 
+import { TextButton } from './Button'
 import ShopkitIcon from './ShopkitIcon'
 import QuantityStepper from './QuantityStepper'
 
@@ -78,9 +79,11 @@ const Price = styled.p`
   margin: 0;
 `
 
-// const StyledButton = styled(Button)`
-//   font-size: ${props => props.theme.textSmall};
-// `
+const StyledButton = styled(TextButton)`
+  font-size: ${props => props.theme.textSmall};
+  text-decoration: none;
+  margin-top: 0.5rem;
+`
 
 // const ProductPrice = styled.span`
 //   color: ${props => props.theme.placeholder};
@@ -117,12 +120,16 @@ function CartItem({
   } = meta
   const [removing, setRemoving] = useState(false)
 
+  const handleRemoveFromCart = async () => {
+    await setRemoving(true)
+    await removeFromCart(id)
+  }
+
   const handleQuantityUpdate = async data => {
     const { quantity: qty } = data
 
     if (qty === 0) {
-      await setRemoving(true)
-      await removeFromCart(id)
+      handleRemoveFromCart()
     } else {
       await updateItem(data)
     }
@@ -141,9 +148,9 @@ function CartItem({
           <Price>{unit}</Price>
           {/* <ProductPrice>{value}</ProductPrice> */}
           {/* {quantity > 1 && <UnitValue> {unit} each</UnitValue>} */}
-          {/* <StyledButton noPadding onClick={onRemove}>
+          <StyledButton noPadding onClick={handleRemoveFromCart}>
             Remove
-          </StyledButton> */}
+          </StyledButton>
         </div>
       </Info>
 

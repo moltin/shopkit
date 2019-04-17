@@ -18,9 +18,11 @@ const StyledCheckbox = styled.input.attrs({
   className: 'shopkit-primary'
 })`
   appearance: none;
-  background-color: ${props => props.theme.primary};
+  background-color: ${props =>
+    props.checked ? props.theme.primary : props.theme.white};
   border-radius: 0.25rem;
-  border: 0;
+  border: 1px solid
+    ${props => (props.checked ? props.theme.primary : props.theme.border)};
   outline: none;
   padding: 0.25rem;
   font-size: ${props => props.theme.textBase};

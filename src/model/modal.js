@@ -4,7 +4,9 @@ import { changeRoute } from '../utils'
 
 export default {
   route: 'cart',
+  // route: 'billing',
   open: false,
+  // open: true,
 
   checkingOut: select(({ route }) => ['shipping', 'billing'].includes(route)),
 

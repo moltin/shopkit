@@ -17,6 +17,7 @@ const Button = styled.button.attrs({
   font-weight: 500;
   padding: ${props => (props.noPadding ? 0 : '0.75rem 1rem')};
   outline: none;
+  opacity: ${props => (props.disabled ? 0.5 : 1)};
 
   &::before,
   &::after {
@@ -44,7 +45,13 @@ const Button = styled.button.attrs({
       width: 100%;
     `};
 
-  ${({ large, theme }) =>
+  ${({ marginTop }) =>
+    marginTop &&
+    css`
+      margin-top: 1.5rem;
+    `};
+
+  ${({ large }) =>
     large &&
     css`
       padding: 1rem;
@@ -57,7 +64,6 @@ export const PrimaryButton = styled(Button).attrs({
   background-color: ${props => props.theme.primary};
   border-color: ${props => props.theme.white};
   color: ${props => props.theme.white};
-  opacity: ${props => (props.disabled ? 0.5 : 1)};
 `
 
 export const TextButton = styled(Button)`
