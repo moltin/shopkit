@@ -1,12 +1,10 @@
-import { action, select } from 'easy-peasy'
+import { action, select, thunk } from 'easy-peasy'
 
 import { changeRoute } from '../utils'
 
 export default {
   route: 'cart',
-  // route: 'billing',
   open: false,
-  // open: true,
 
   checkingOut: select(({ route }) => ['shipping', 'billing'].includes(route)),
 
@@ -26,9 +24,18 @@ export default {
     state.route = 'cart'
   }),
 
-  closeModal: action(state => {
-    if (state.checkingOut) return
+  closeModal: thunk(async (actions, _, { getStoreState, getState }) => {
+    const { checkingOut } = await getState()
+    const {
+      checkout: { completed }
+    } = await getStoreState()
 
+    if (!completed && checkingOut) return
+
+    actions.close()
+  }),
+
+  close: action(state => {
     state.open = false
   }),
 

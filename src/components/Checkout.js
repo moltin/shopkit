@@ -12,6 +12,7 @@ import Label from './Label'
 import Input, { ErrorAlert } from './Input'
 import Checkbox from './Checkbox'
 import { PrimaryButton } from './Button'
+import AddressPreview from './AddressPreview'
 import OrderConfirmation from './OrderConfirmation'
 
 const Wrapper = styled.div`
@@ -33,14 +34,14 @@ function Checkout({ stripe }) {
   const [initialValues, setInitialValues] = useState({
     billingIsShipping: true
   })
-  const [checkedOut, setCheckedOut] = useState(false)
+  const [paid, setPaid] = useState(false)
   const [order, setOrder] = useState(null)
   const { route } = useStore(({ modal }) => modal)
   const { id: cartId, subTotal } = useStore(({ cart }) => cart)
   const { createOrder, payForOrder, setDirty } = useActions(
     ({ checkout }) => checkout
   )
-  const { goToBilling } = useActions(({ modal }) => modal)
+  const { goToBilling, goToShipping } = useActions(({ modal }) => modal)
   const { deleteCart } = useActions(({ cart }) => cart)
 
   function validate(values) {
@@ -93,18 +94,18 @@ function Checkout({ stripe }) {
         token: token.token.id
       })
 
-      setCheckedOut(true)
+      setPaid(true)
       deleteCart(cartId)
     } catch (paymentError) {
       console.log({ paymentError })
     }
   }
 
-  return checkedOut ? (
+  return paid ? (
     <OrderConfirmation order={order} />
   ) : (
     <Form onSubmit={onSubmit} initialValues={initialValues} validate={validate}>
-      {({ handleSubmit, submitting, invalid, values, form, pristine }) => {
+      {({ handleSubmit, submitting, invalid, values, form, dirty }) => {
         if (
           !values.createCustomer &&
           values.customer &&
@@ -119,7 +120,7 @@ function Checkout({ stripe }) {
 
         const onStripeChange = e => form.change('stripe', e)
 
-        setDirty(!pristine)
+        setDirty(dirty)
 
         return (
           <form onSubmit={handleSubmit}>
@@ -230,6 +231,12 @@ function Checkout({ stripe }) {
                     Pay {subTotal}
                   </PrimaryButton>
                 </div>
+
+                <AddressPreview
+                  type="Shipping"
+                  handleClick={goToShipping}
+                  address={values.shipping_address}
+                />
               </div>
             )}
           </form>

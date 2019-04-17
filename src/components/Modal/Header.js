@@ -8,15 +8,19 @@ export default function Header({ route }) {
   const { closeModal, goToCart, goToShipping } = useActions(
     ({ modal }) => modal
   )
-  const { dirty } = useStore(({ checkout }) => checkout)
+  const { dirty, completed } = useStore(({ checkout }) => checkout)
 
   const handleClick = async () => {
     switch (route) {
       case 'billing':
+        if (completed) {
+          return closeModal()
+        }
+
         return goToShipping()
 
       case 'shipping': {
-        if (dirty) {
+        if (!completed && dirty) {
           const proceed = confirm(
             'Are you sure you want to abandon your checkout?'
           )
@@ -35,7 +39,7 @@ export default function Header({ route }) {
   return (
     <StyledHeader>
       <ActionButton onClick={handleClick}>
-        {route === 'shipping' || route === 'billing' ? (
+        {route === 'shipping' || (route === 'billing' && !completed) ? (
           <SVG
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"

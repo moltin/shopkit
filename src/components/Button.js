@@ -52,7 +52,7 @@ const Button = styled.button.attrs({
 `
 
 export const PrimaryButton = styled(Button).attrs({
-  className: 'shopkit-primary-button'
+  className: 'shopkit-primary-button shopkit-primary'
 })`
   background-color: ${props => props.theme.primary};
   border-color: ${props => props.theme.white};

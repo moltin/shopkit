@@ -14,7 +14,8 @@ const CheckWrapper = styled.div`
 `
 
 const StyledCheckbox = styled.input.attrs({
-  type: 'checkbox'
+  type: 'checkbox',
+  className: 'shopkit-primary'
 })`
   appearance: none;
   background-color: ${props => props.theme.primary};

@@ -5,6 +5,7 @@ import { changeRoute } from '../utils'
 export default {
   route: 'shipping',
   dirty: false,
+  completed: false,
 
   goToShipping: changeRoute('shipping'),
   goToPayment: changeRoute('payment'),
@@ -59,17 +60,26 @@ export default {
     }
   ),
 
-  payForOrder: thunk(async (_, { orderId, token }, { injections: { api } }) => {
-    const { payment } = await api.post(`orders/${orderId}/payments`, {
-      gateway: 'stripe',
-      method: 'purchase',
-      payment: token
-    })
+  payForOrder: thunk(
+    async (actions, { orderId, token }, { injections: { api } }) => {
+      const { payment } = await api.post(`orders/${orderId}/payments`, {
+        gateway: 'stripe',
+        method: 'purchase',
+        payment: token
+      })
 
-    return payment
-  }),
+      actions.setCompleted()
+
+      return payment
+    }
+  ),
 
   setDirty: action((state, dirty) => {
     state.dirty = dirty
+  }),
+
+  setCompleted: action((state, completed = true) => {
+    state.dirty = false
+    state.completed = completed
   })
 }

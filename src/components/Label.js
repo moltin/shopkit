@@ -12,6 +12,7 @@ export default function Label({ htmlFor, label, children, ...props }) {
 const StyledLabel = styled.label`
   display: inline-flex;
   color: ${props => (props.error ? props.theme.error : props.theme.dark)};
+  cursor: pointer;
   font-weight: 500;
   margin: 0.75rem 0;
 `
