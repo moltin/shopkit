@@ -6,18 +6,18 @@ import { Heading, Text } from './typography'
 import { PrimaryButton } from './Button'
 
 const stroke = keyframes`
-100% {
-  stroke-dashoffset: 300;
-}
+  100% {
+    stroke-dashoffset: 300;
+  }
 `
 
 const scale = keyframes`
-0%, 100% {
-  transform: none;
-}
-50% {
-  transform: scale3d(0.9, 0.9, 1);
-}
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(0.9, 0.9, 1);
+  }
 `
 
 const fadeIn = keyframes`
@@ -114,17 +114,6 @@ export default function({}) {
       <AnimatedButton onClick={continueShopping}>
         Continue shopping
       </AnimatedButton>
-
-      {/* <div className="shopkit-order-summary">
-        <div className="shopkit-order-summary--title">Order summary</div>
-        <div className="shopkit-order-summary--items">Items</div>
-        <div className="shopkit-order-summary--total">
-          <span className="shopkit-order__total--title">Total</span>
-          <span className="shopkit-order__total--subtotal">
-            {meta.display_price.with_tax.formatted}
-          </span>
-        </div>
-      </div> */}
     </Wrapper>
   )
 }

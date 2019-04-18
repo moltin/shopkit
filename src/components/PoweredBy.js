@@ -14,12 +14,7 @@ const Link = styled.a`
   font-size: 100%;
   text-decoration: none;
   margin: 0 auto;
-  // opacity: 0.3;
   transition: opacity 0.1s ease-in;
-
-  // &:hover {
-  //   opacity: 1;
-  // }
 `
 
 const Logo = styled.svg`

@@ -30,12 +30,46 @@ const StripeInput = styled.div`
   }
 `
 
+function PaymentForm({ onChange, values }) {
+  return (
+    <StripeInput>
+      <Label htmlFor="payment">Payment card</Label>
+      <CardElement
+        onChange={onChange}
+        hidePostalCode={true}
+        id="payment"
+        style={{
+          base: {
+            color: '#273142',
+            fontFamily:
+              '-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+            fontSize: '15px',
+            '::placeholder': {
+              color: '#58697F'
+            }
+          },
+          invalid: {
+            color: '#E62F17',
+            ':focus': {
+              color: '#E62F17'
+            }
+          }
+        }}
+      />
+      {values && values.error && (
+        <ErrorAlert>{values.error.message}</ErrorAlert>
+      )}
+    </StripeInput>
+  )
+}
+
 function Checkout({ stripe }) {
+  const [order, setOrder] = useState(null)
   const [initialValues, setInitialValues] = useState({
+    ...order,
     billingIsShipping: true
   })
   const [paid, setPaid] = useState(false)
-  const [order, setOrder] = useState(null)
   const { route } = useStore(({ modal }) => modal)
   const { id: cartId, subTotal } = useStore(({ cart }) => cart)
   const { createOrder, payForOrder, setDirty } = useActions(
@@ -43,6 +77,8 @@ function Checkout({ stripe }) {
   )
   const { goToBilling, goToShipping } = useActions(({ modal }) => modal)
   const { deleteCart } = useActions(({ cart }) => cart)
+  const [paymentError, setPaymentError] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   function validate(values) {
     if (route === 'shipping') {
@@ -52,6 +88,27 @@ function Checkout({ stripe }) {
     }
   }
 
+  async function handlePayment(orderId, token) {
+    await setPaymentError(null)
+
+    try {
+      setLoading(true)
+
+      await payForOrder({
+        orderId,
+        token: token.token.id
+      })
+
+      setPaid(true)
+      deleteCart(cartId)
+    } catch (paymentError) {
+      console.log({ paymentError })
+      setPaymentError(paymentError)
+    }
+
+    setLoading(false)
+  }
+
   async function onSubmit(values) {
     if (route === 'shipping') {
       setInitialValues(values)
@@ -59,22 +116,23 @@ function Checkout({ stripe }) {
       return
     }
 
-    let order
+    let newOrder
     let orderError
     let token
 
-    const { shipping_address } = values
-
-    try {
-      order = await createOrder(values)
-      console.log({ order })
-      setOrder(order)
-    } catch (error) {
-      orderError = error
-      console.log({ orderError })
+    if (!order) {
+      try {
+        newOrder = await createOrder(values)
+        await setOrder(newOrder)
+      } catch (error) {
+        orderError = error
+        console.log({ orderError })
+      }
     }
 
     try {
+      const { shipping_address } = newOrder
+
       token = await stripe.createToken({
         name: `${shipping_address.first_name} ${shipping_address.last_name}`,
         address_line1: shipping_address.line_1,
@@ -84,21 +142,13 @@ function Checkout({ stripe }) {
         address_zip: shipping_address.postcode,
         address_country: shipping_address.country
       })
+
+      console.log("Jamie's token", token)
     } catch (tokenError) {
       console.log('Failed to create token', tokenError)
     }
 
-    try {
-      const payment = await payForOrder({
-        orderId: order.id,
-        token: token.token.id
-      })
-
-      setPaid(true)
-      deleteCart(cartId)
-    } catch (paymentError) {
-      console.log({ paymentError })
-    }
+    await handlePayment(newOrder.id, token)
   }
 
   return paid ? (
@@ -121,6 +171,30 @@ function Checkout({ stripe }) {
         const onStripeChange = e => form.change('stripe', e)
 
         setDirty(dirty)
+
+        if (order && !paid) {
+          return (
+            <form onSubmit={handleSubmit}>
+              <RouteHeader>
+                <Heading>Pay for your order</Heading>
+              </RouteHeader>
+
+              <div>{paymentError}</div>
+
+              <PaymentForm values={values.stripe} onChange={onStripeChange} />
+
+              <div>
+                <PrimaryButton
+                  block
+                  disabled={submitting || invalid || loading}
+                  type="submit"
+                >
+                  {loading ? 'Processing payment' : `Pay ${subTotal}`}
+                </PrimaryButton>
+              </div>
+            </form>
+          )
+        }
 
         return (
           <form onSubmit={handleSubmit}>
@@ -177,34 +251,10 @@ function Checkout({ stripe }) {
                     autoFocus
                   />
 
-                  <StripeInput>
-                    <Label htmlFor="payment">Payment card</Label>
-                    <CardElement
-                      onChange={onStripeChange}
-                      hidePostalCode={true}
-                      id="payment"
-                      style={{
-                        base: {
-                          color: '#273142',
-                          fontFamily:
-                            '-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-                          fontSize: '15px',
-                          '::placeholder': {
-                            color: '#58697F'
-                          }
-                        },
-                        invalid: {
-                          color: '#E62F17',
-                          ':focus': {
-                            color: '#E62F17'
-                          }
-                        }
-                      }}
-                    />
-                    {values.stripe && values.stripe.error && (
-                      <ErrorAlert>{values.stripe.error.message}</ErrorAlert>
-                    )}
-                  </StripeInput>
+                  <PaymentForm
+                    values={values.stripe}
+                    onChange={onStripeChange}
+                  />
                 </Wrapper>
 
                 <Wrapper>
@@ -225,10 +275,10 @@ function Checkout({ stripe }) {
                 <div>
                   <PrimaryButton
                     block
-                    disabled={submitting || invalid}
+                    disabled={submitting || invalid || loading}
                     type="submit"
                   >
-                    Pay {subTotal}
+                    {loading ? 'Processing payment' : `Pay ${subTotal}`}
                   </PrimaryButton>
                 </div>
 

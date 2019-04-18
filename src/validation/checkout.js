@@ -170,5 +170,7 @@ export const billingValidation = values => {
     errors.stripe.complete = 'Required'
   }
 
+  console.log(errors)
+
   return errors
 }

@@ -1,20 +1,25 @@
 import React from 'react'
-import { useActions } from 'easy-peasy'
+import { useActions, useStore } from 'easy-peasy'
 
 import { PrimaryButton } from './Button'
 
-function LoginButton({ text }) {
-  const { goToLogin } = useActions(({ modal }) => modal)
+function LoginButton({ loginText, ordersText }) {
+  const { goToLogin, goToOrders } = useActions(({ modal }) => modal)
+  const { loggedIn } = useStore(({ user }) => user)
 
   return (
-    <PrimaryButton className="shopkit-login-button" onClick={goToLogin}>
-      {text}
+    <PrimaryButton
+      className="shopkit-login-button"
+      onClick={loggedIn ? goToOrders : goToLogin}
+    >
+      {loggedIn ? ordersText : loginText}
     </PrimaryButton>
   )
 }
 
 LoginButton.defaultProps = {
-  text: 'Login'
+  loginText: 'Login',
+  ordersText: 'My Orders'
 }
 
 export default LoginButton

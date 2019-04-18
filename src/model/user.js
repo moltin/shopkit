@@ -1,8 +1,8 @@
 import { action, thunk, select } from 'easy-peasy'
 
 export default {
-  id: null,
-  token: null,
+  id: '33',
+  token: '32',
   orders: [],
 
   loggedIn: select(({ id, token }) => id && token),
