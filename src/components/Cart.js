@@ -33,7 +33,7 @@ export default function Cart() {
           {!isEmpty && (
             <React.Fragment>
               <CartTotalRow>
-                <CartTotalTitle>Total</CartTotalTitle>
+                <CartTotalTitle>Sub total</CartTotalTitle>
                 <CartTotalSubTotal>{subTotal}</CartTotalSubTotal>
               </CartTotalRow>
 

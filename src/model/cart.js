@@ -27,6 +27,10 @@ export default {
     meta ? meta.display_price.without_tax.formatted : 0
   ),
 
+  total: select(({ meta }) =>
+    meta ? meta.display_price.with_tax.formatted : 0
+  ),
+
   setCartId: action((state, cartId) => {
     state.id = cartId
   }),

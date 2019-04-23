@@ -1,67 +1,16 @@
 import React, { useState } from 'react'
 import { useStore, useActions } from 'easy-peasy'
 import { Form } from 'react-final-form'
-import { CardElement, injectStripe } from 'react-stripe-elements'
-import styled from 'styled-components'
+import { injectStripe } from 'react-stripe-elements'
 
 import { shippingValidation, billingValidation } from '../validation/checkout'
 import { RouteHeader } from './Modal/Header'
 import { Heading } from './typography'
-import AddressFields from './AddressFields'
-import Label from './Label'
-import Input, { ErrorAlert } from './Input'
-import Checkbox from './Checkbox'
 import { PrimaryButton } from './Button'
-import AddressPreview from './AddressPreview'
 import OrderConfirmation from './OrderConfirmation'
-
-const Wrapper = styled.div`
-  margin-top: 0.5rem;
-  border-top: 1px solid ${props => props.theme.divider};
-  padding: 0.75rem 0 1.5rem;
-`
-
-const StripeInput = styled.div`
-  .StripeElement {
-    background-color: ${props => props.theme.white};
-    border: 1px solid ${props => props.theme.border};
-    border-radius: 0.25rem;
-    padding: 0.75rem 1rem;
-  }
-`
-
-function PaymentForm({ onChange, values }) {
-  return (
-    <StripeInput>
-      <Label htmlFor="payment">Payment card</Label>
-      <CardElement
-        onChange={onChange}
-        hidePostalCode={true}
-        id="payment"
-        style={{
-          base: {
-            color: '#273142',
-            fontFamily:
-              '-apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
-            fontSize: '15px',
-            '::placeholder': {
-              color: '#58697F'
-            }
-          },
-          invalid: {
-            color: '#E62F17',
-            ':focus': {
-              color: '#E62F17'
-            }
-          }
-        }}
-      />
-      {values && values.error && (
-        <ErrorAlert>{values.error.message}</ErrorAlert>
-      )}
-    </StripeInput>
-  )
-}
+import ShippingForm from './ShippingForm'
+import BillingForm from './BillingForm'
+import PaymentForm from './PaymentForm'
 
 function Checkout({ stripe }) {
   const [order, setOrder] = useState(null)
@@ -71,7 +20,7 @@ function Checkout({ stripe }) {
   })
   const [paid, setPaid] = useState(false)
   const { route } = useStore(({ modal }) => modal)
-  const { id: cartId, subTotal } = useStore(({ cart }) => cart)
+  const { id: cartId, total } = useStore(({ cart }) => cart)
   const { createOrder, payForOrder, setDirty } = useActions(
     ({ checkout }) => checkout
   )
@@ -168,8 +117,6 @@ function Checkout({ stripe }) {
           delete values.billing_address
         }
 
-        const onStripeChange = e => form.change('stripe', e)
-
         setDirty(dirty)
 
         if (order && !paid) {
@@ -181,7 +128,7 @@ function Checkout({ stripe }) {
 
               <div>{paymentError}</div>
 
-              <PaymentForm values={values.stripe} onChange={onStripeChange} />
+              <PaymentForm form={form} />
 
               <div>
                 <PrimaryButton
@@ -189,7 +136,7 @@ function Checkout({ stripe }) {
                   disabled={submitting || invalid || loading}
                   type="submit"
                 >
-                  {loading ? 'Processing payment' : `Pay ${subTotal}`}
+                  Pay
                 </PrimaryButton>
               </div>
             </form>
@@ -199,95 +146,26 @@ function Checkout({ stripe }) {
         return (
           <form onSubmit={handleSubmit}>
             {route === 'shipping' ? (
-              <div>
-                <RouteHeader>
-                  <Heading>Shipping information</Heading>
-                </RouteHeader>
-
-                <div>
-                  <AddressFields
-                    isEditing={values.shipping_address}
-                    type="shipping"
-                    form={form}
-                  />
-                </div>
-
-                <div className="shopkit-mt-6">
-                  <PrimaryButton
-                    block
-                    disabled={submitting || invalid}
-                    type="submit"
-                  >
-                    Continue to billing information
-                  </PrimaryButton>
-                </div>
-              </div>
+              <ShippingForm
+                form={form}
+                shipping_address={values.shipping_address}
+                submitting={submitting}
+                invalid={invalid}
+              />
             ) : (
-              <div>
-                <RouteHeader>
-                  <Heading>Billing information</Heading>
-                </RouteHeader>
-
-                <div>
-                  <Checkbox
-                    name="billingIsShipping"
-                    label="Same as shipping address"
-                  />
-
-                  {!values.billingIsShipping && (
-                    <AddressFields
-                      isEditing={values.billing_address}
-                      type="billing"
-                      form={form}
-                    />
-                  )}
-                </div>
-
-                <Wrapper>
-                  <Input
-                    type="email"
-                    name="customer.email"
-                    label="Email"
-                    autoFocus
-                  />
-
-                  <PaymentForm
-                    values={values.stripe}
-                    onChange={onStripeChange}
-                  />
-                </Wrapper>
-
-                <Wrapper>
-                  <Checkbox
-                    name="createCustomer"
-                    label="Save this information for next time"
-                  />
-
-                  {values.createCustomer && (
-                    <Input
-                      type="password"
-                      name="customer.password"
-                      label="Password"
-                    />
-                  )}
-                </Wrapper>
-
-                <div>
-                  <PrimaryButton
-                    block
-                    disabled={submitting || invalid || loading}
-                    type="submit"
-                  >
-                    {loading ? 'Processing payment' : `Pay ${subTotal}`}
-                  </PrimaryButton>
-                </div>
-
-                <AddressPreview
-                  type="Shipping"
-                  handleClick={goToShipping}
-                  address={values.shipping_address}
-                />
-              </div>
+              <BillingForm
+                form={form}
+                billingIsShipping={values.billingIsShipping}
+                billing_address={values.billing_address}
+                shipping_address={values.shipping_address}
+                createCustomer={values.createCustomer}
+                submitting={submitting}
+                invalid={invalid}
+                loading={loading}
+                goToShipping={goToShipping}
+                stripe={stripe}
+                total={total}
+              />
             )}
           </form>
         )

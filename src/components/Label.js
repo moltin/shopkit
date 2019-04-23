@@ -10,14 +10,14 @@ export default function Label({
 }) {
   return (
     <StyledLabel htmlFor={htmlFor} {...props}>
-      {children || label} {required && <Required>(required)</Required>}
+      {children || label}
+      {required && <Required>*</Required>}
     </StyledLabel>
   )
 }
 
 const StyledLabel = styled.label`
   display: inline-flex;
-  // color: ${props => (props.error ? props.theme.error : props.theme.dark)};
   color: ${props => props.theme.dark};
   cursor: pointer;
   font-weight: 500;

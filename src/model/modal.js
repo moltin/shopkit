@@ -3,8 +3,8 @@ import { action, select, thunk } from 'easy-peasy'
 import { changeRoute } from '../utils'
 
 export default {
-  route: 'cart',
-  // route: 'billing',
+  // route: 'cart',
+  route: 'shipping',
   // open: false,
   open: true,
 
