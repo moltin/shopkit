@@ -10,7 +10,7 @@ export default function Label({
 }) {
   return (
     <StyledLabel htmlFor={htmlFor} {...props}>
-      {children || label} {required && <Required>(required)</Required>}
+      {children || label} {required && <Required>*</Required>}
     </StyledLabel>
   )
 }
