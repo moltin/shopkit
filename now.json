@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "btn",
+  "scope": "moltin",
   "alias": "btn.moltin.com",
   "regions": ["all"],
   "builds": [{ "src": "package.json", "use": "@now/static-build" }]
