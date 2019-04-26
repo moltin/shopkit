@@ -1,9 +1,9 @@
 {
-  "name": "@moltin/btn",
+  "name": "@moltin/shopkit",
   "version": "0.0.0-semantic-release",
   "description": "Embeddable Moltin Cart + Checkout",
   "main": "dist/index.js",
-  "repository": "moltin/btn",
+  "repository": "moltin/shopkit",
   "scripts": {
     "dev": "webpack-dev-server",
     "deploy": "now --target=production",
