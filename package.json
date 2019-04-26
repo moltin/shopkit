@@ -4,6 +4,9 @@
   "description": "Embeddable Moltin Cart + Checkout",
   "main": "dist/index.js",
   "repository": "moltin/shopkit",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "webpack-dev-server",
     "deploy": "now --target=production",
@@ -43,5 +46,8 @@
     "webpack-cli": "3.3.1",
     "webpack-dev-server": "3.3.1",
     "webpack-obfuscator": "^0.18.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
