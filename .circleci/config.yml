@@ -1,0 +1,34 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: 'circleci/node:latest'
+    steps:
+      - checkout
+      - run: yarn
+      - run: yarn build
+      - save_cache:
+          paths:
+            - node_modules
+          key: moltin-shopkit-btn-{{ checksum "package.json" }}
+  release:
+    docker:
+      - image: 'circleci/node:latest'
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - moltin-shopkit-btn-{{ checksum "package.json" }}
+      - run: yarn build
+      - run: npx semantic-release
+workflows:
+  version: 2
+  build_test_release:
+    jobs:
+      - build
+      - release:
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
