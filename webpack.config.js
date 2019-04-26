@@ -1,7 +1,7 @@
 const { join, resolve } = require('path')
-const TerserJSPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const JavaScriptObfuscator = require('webpack-obfuscator')
 
 const { NODE_ENV } = process.env
 
@@ -38,10 +38,13 @@ module.exports = {
   },
   output: {
     path: resolve(__dirname, 'dist'),
-    filename: 'index.js'
+    filename: 'index.js',
+    library: 'MoltinShopkit',
+    libraryExport: 'default',
+    libraryTarget: 'window'
   },
   optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    minimizer: [new OptimizeCSSAssetsPlugin({})],
     splitChunks: {
       cacheGroups: {
         styles: {
@@ -54,8 +57,10 @@ module.exports = {
     }
   },
   plugins: [
+    devMode ? null : new JavaScriptObfuscator(),
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
     })
-  ]
+  ].filter(i => i)
 }
