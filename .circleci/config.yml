@@ -19,7 +19,7 @@ jobs:
       - restore_cache:
           keys:
             - moltin-shopkit-btn-{{ checksum "package.json" }}
-      - run: yarn build
+            - moltin-shopkit-btn-
       - run: npx semantic-release
 workflows:
   version: 2
