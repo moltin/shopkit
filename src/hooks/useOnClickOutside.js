@@ -5,16 +5,11 @@ export default function useOnClickOutside(ref, handler, open) {
 
   useEffect(() => {
     const listener = event => {
-      if (ref.current.contains(event.target)) {
-        // Inside click, return
-        return
-      }
+      if (ref.current.contains(event.target)) return
 
-      // Outside click, Handle event
       handler(event)
     }
 
-    // Optimize
     if (open) {
       document.addEventListener(clickEvent, listener)
     } else {
