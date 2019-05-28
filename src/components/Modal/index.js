@@ -43,7 +43,7 @@ export default function Modal({ stripeKey }) {
 
   const ref = useRef()
 
-  useOnClickOutside(ref, closeModal)
+  useOnClickOutside(ref, closeModal, open)
 
   if (stripeError) {
     console.error(stripeError)
