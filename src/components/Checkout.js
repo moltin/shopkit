@@ -207,7 +207,7 @@ function Checkout({ stripe }) {
                   </StripeInput>
                 </Wrapper>
 
-                <Wrapper>
+                {/* <Wrapper>
                   <Checkbox
                     name="createCustomer"
                     label="Save this information for next time"
@@ -220,7 +220,7 @@ function Checkout({ stripe }) {
                       label="Password"
                     />
                   )}
-                </Wrapper>
+                </Wrapper> */}
 
                 <div>
                   <PrimaryButton
