@@ -1,19 +1,28 @@
 import { useEffect } from 'react'
 
-export default function useOnClickOutside(ref, handler) {
+export default function useOnClickOutside(ref, handler, open) {
+  const clickEvent = 'ontouchstart' in window ? 'touchstart' : 'mousedown'
+
   useEffect(() => {
     const listener = event => {
-      if (event.target.classList.contains('shopkit-modal-overlay')) {
-        handler(event)
+      if (ref.current.contains(event.target)) {
+        // Inside click, return
+        return
       }
+
+      // Outside click, Handle event
+      handler(event)
     }
 
-    document.addEventListener('mousedown', listener)
-    document.addEventListener('touchstart', listener)
+    // Optimize
+    if (open) {
+      document.addEventListener(clickEvent, listener)
+    } else {
+      document.removeEventListener(clickEvent, listener)
+    }
 
     return () => {
-      document.removeEventListener('mousedown', listener)
-      document.removeEventListener('touchstart', listener)
+      document.removeEventListener(clickEvent, listener)
     }
-  }, [ref, handler])
+  }, [ref, handler, open])
 }

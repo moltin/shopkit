@@ -1,17 +1,16 @@
+import { Elements, StripeProvider } from 'react-stripe-elements'
 import React, { useRef } from 'react'
-import { useStore, useActions } from 'easy-peasy'
-import { StripeProvider, Elements } from 'react-stripe-elements'
-import styled from 'styled-components'
+import { useActions, useStore } from 'easy-peasy'
 
-import useOnClickOutside from '../../hooks/useOnClickOutside'
-import useScript from '../../hooks/useScript'
-
-import Header from './Header'
-import Footer from './Footer'
-import LoginForm from '../LoginForm'
-import OrderList from '../OrderList'
 import Cart from '../Cart'
 import Checkout from '../Checkout'
+import Footer from './Footer'
+import Header from './Header'
+import LoginForm from '../LoginForm'
+import OrderList from '../OrderList'
+import styled from 'styled-components'
+import useOnClickOutside from '../../hooks/useOnClickOutside'
+import useScript from '../../hooks/useScript'
 
 function renderRoute(route) {
   switch (route) {
@@ -43,7 +42,7 @@ export default function Modal({ stripeKey }) {
 
   const ref = useRef()
 
-  useOnClickOutside(ref, closeModal)
+  useOnClickOutside(ref, closeModal, open)
 
   if (stripeError) {
     console.error(stripeError)
