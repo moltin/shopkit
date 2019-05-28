@@ -47,7 +47,15 @@ module.exports = {
   optimization: {
     minimizer: [
       new OptimizeCSSAssetsPlugin({}),
-      new TerserPlugin({ cache: true, parallel: true })
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        terserOptions: {
+          safari10: true,
+          ie8: true,
+          ecma: 5
+        }
+      })
     ],
     splitChunks: {
       cacheGroups: {
