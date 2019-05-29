@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "@moltin/request": "1.6.1",
-    "algolia-places-react": "1.4.0",
+    "algolia-places-react": "1.4.1",
     "easy-peasy": "2.1.6",
     "final-form": "4.12.0",
     "react": "16.8.6",
