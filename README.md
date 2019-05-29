@@ -114,7 +114,7 @@ You can add as many cart buttons to your page. All you need is:
 
 The default text for a cart button is `Cart`. You can change the default text by providing a `data-moltin-text="Basket"` attribute to your button.
 
-#### Example
+#### Example
 
 ```html
 <span class="moltin-cart-button" data-moltin-text="Basket"></span>
