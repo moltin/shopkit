@@ -8,7 +8,7 @@
 
 You can use Shopkit anywhere you can insert custom HTML.
 
-### Step 1
+### Step 1
 
 First, you'll need to enable Stripe as a payment gateway via the [Dashboard UI](https://dashboard.moltin.com/app/settings/gateways/stripe) or [API](https://docs.moltin.com/api/payments/gateways/configure-stripe) directly.
 
@@ -16,7 +16,7 @@ You'll find your Stripe `publishable key` and `secret key` via the [Stripe Dashb
 
 **Shopkit only works with Stripe during BETA.**
 
-### Step 2
+### Step 2
 
 Add the following snippet before the `</body>` tag on your website to enable Shopkit. You'll want to populate your Moltin `client id` and Stripe `publishable key` here.
 
@@ -28,7 +28,7 @@ Add the following snippet before the `</body>` tag on your website to enable Sho
 ></script>
 ```
 
-### Step 3
+### Step 3
 
 Add a Cart button with the following code:
 
@@ -60,7 +60,7 @@ You can add as many Buttons to your website as you like. All you need is:
 
 The default text for a button is `Add to Cart`. You can change the default text by providing a `data-moltin-text="Add to Basket"` attribute to your button.
 
-#### Example
+#### Example
 
 ```html
 <span
@@ -102,7 +102,7 @@ Simply omit the `data-moltin-product-id` attribute and add all of the following 
 ></span>
 ```
 
-## Cart button
+## Cart button
 
 You can add as many cart buttons to your page. All you need is:
 
@@ -124,7 +124,7 @@ The default text for a cart button is `Cart`. You can change the default text by
 
 By default the cart button shows the number of items in the cart alongside the text defined above. You can change this behaviour by providing a `data-moltin-show-total="true"` attribute to your button.
 
-#### Example
+#### Example
 
 ```html
 <span class="moltin-cart-button" data-moltin-show-total="true"></span>
@@ -132,7 +132,7 @@ By default the cart button shows the number of items in the cart alongside the t
 
 ## Global configuration
 
-### Override styles
+### Override styles
 
 By default Shopkit ships with a blue theme. You can change the colours by overriding the CSS classes.
 Somewhere in your `<head>` you will want to add the following:
