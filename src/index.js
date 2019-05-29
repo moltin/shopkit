@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createClient } from '@moltin/request'
+import { MoltinClient } from '@moltin/request'
 import { createStore, StoreProvider } from 'easy-peasy'
 import { ThemeProvider } from 'styled-components'
 
@@ -43,7 +43,7 @@ function init(document) {
   const cart = document.createElement('div')
   document.body.appendChild(cart)
 
-  const api = new createClient({
+  const api = new MoltinClient({
     client_id,
     application: 'moltin-btn',
     ...(currency && { currency })
