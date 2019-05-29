@@ -21,7 +21,7 @@
   "author": "Jamie Barton <jamie@notrab.dev>",
   "license": "MIT",
   "dependencies": {
-    "@moltin/request": "1.6.1",
+    "@moltin/request": "1.6.2",
     "algolia-places-react": "1.4.0",
     "easy-peasy": "2.1.6",
     "final-form": "4.12.0",

@@ -727,12 +727,12 @@
   resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.3.tgz#6310a047f12d21a1036fb031317219892440416f"
   integrity sha512-4zAPlpDEh2VwXswwr/t8xGNDGg8RQiPxtxZ3qQEXyQsBV39ptTdESCjuBvGze1nLMVrxmTIKmnO/nAV8Tqjjzg==
 
-"@moltin/request@1.6.1":
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/@moltin/request/-/request-1.6.1.tgz#0f5a104d7743343738d80806ce93715eb92686de"
-  integrity sha512-tP3eLHvUFUIke5+2v3ft4GPFFuVGRTW0VZs2PEtYTEV/XllL9/D69xkCZkeqnSn9ENCbGmwzP6m+zJUNld68ag==
+"@moltin/request@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@moltin/request/-/request-1.6.2.tgz#080c5726d7c78b9cfdc5a36b420c96eaccdbb1db"
+  integrity sha512-BFX6SgBjH3WlM+zo8+RgDYbkxCl3uAjqSDFE3Xh0gRpJ0KZeuLN4mR319z3OCRh2k1L83NfHwwH9GLKM/3ruAg==
   dependencies:
-    cross-fetch "3.0.2"
+    cross-fetch "3.0.3"
 
 "@types/q@^1.5.1":
   version "1.5.2"
@@ -1875,12 +1875,12 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-cross-fetch@3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.2.tgz#b7136491967031949c7f86b15903aef4fa3f1768"
-  integrity sha512-a4Z0EJ5Nck6QtMy9ZqloLfpvu2uMV3sBfMCR+CgSBCZc6z5KR4bfEiD3dkepH8iZgJMXQpTqf8FjMmvu/GMFkg==
+cross-fetch@3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.3.tgz#b988beab275939cb77ad4e362c873f7fa8a221a5"
+  integrity sha512-mplYkc4CopHu+AdHK8wxjJcPskUxp5CvPTdtDij3MUgVNBa0xOb9CQqbbn1zO23qISM4WLxIBociyEVQL7WQAg==
   dependencies:
-    node-fetch "2.3.0"
+    node-fetch "2.6.0"
     whatwg-fetch "3.0.0"
 
 cross-spawn@^6.0.0, cross-spawn@^6.0.5:
@@ -4116,10 +4116,10 @@ node-fetch@1.6.3:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
-node-fetch@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.3.0.tgz#1a1d940bbfb916a1d3e0219f037e89e71f8c5fa5"
-  integrity sha512-MOd8pV3fxENbryESLgVIeaGKrdl+uaYhCSSVkjeOb/31/njTpcis5aWfdqgNlHIrKOLRbMnfPINPOML2CIFeXA==
+node-fetch@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
+  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
 
 node-forge@0.7.5:
   version "0.7.5"
