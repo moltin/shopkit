@@ -2,6 +2,7 @@ const { join, resolve } = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const JavaScriptObfuscator = require('webpack-obfuscator')
+const TerserPlugin = require('terser-webpack-plugin')
 
 const { NODE_ENV } = process.env
 
@@ -44,7 +45,18 @@ module.exports = {
     libraryTarget: 'window'
   },
   optimization: {
-    minimizer: [new OptimizeCSSAssetsPlugin({})],
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({}),
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        terserOptions: {
+          safari10: true,
+          ie8: true,
+          ecma: 5
+        }
+      })
+    ],
     splitChunks: {
       cacheGroups: {
         styles: {
