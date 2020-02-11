@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import { MoltinClient } from '@moltin/request'
 import { createStore, StoreProvider } from 'easy-peasy'
 import { ThemeProvider } from 'styled-components'
+import 'arrive';
 
 import model from './model'
 
@@ -55,8 +56,10 @@ function init(document) {
     }
   })
 
-  buttons.forEach(el =>
-    ReactDOM.render(
+  document.arrive(
+    ".moltin-buy-button",
+    { existing: true },
+    (el) => ReactDOM.render(
       <StoreProvider store={store}>
         <ThemeProvider theme={theme}>
           <BuyButton {...el.dataset} />
@@ -64,10 +67,12 @@ function init(document) {
       </StoreProvider>,
       el
     )
-  )
+  );
 
-  cartBtns.forEach(el => {
-    ReactDOM.render(
+  document.arrive(
+    ".moltin-cart-button",
+    { existing: true },
+    (el) => ReactDOM.render(
       <StoreProvider store={store}>
         <ThemeProvider theme={theme}>
           <CartButton {...el.dataset} />
@@ -75,10 +80,12 @@ function init(document) {
       </StoreProvider>,
       el
     )
-  })
+  );
 
-  loginBtns.forEach(el => {
-    ReactDOM.render(
+  document.arrive(
+    ".moltin-login-button",
+    { existing: true },
+    (el) => ReactDOM.render(
       <StoreProvider store={store}>
         <ThemeProvider theme={theme}>
           <LoginButton {...el.dataset} />
@@ -86,7 +93,7 @@ function init(document) {
       </StoreProvider>,
       el
     )
-  })
+  );
 
   ReactDOM.render(
     <StoreProvider store={store}>

@@ -23,6 +23,7 @@
   "dependencies": {
     "@moltin/request": "2.0.0",
     "algolia-places-react": "1.4.1",
+    "arrive": "2.4.1",
     "easy-peasy": "2.1.6",
     "final-form": "4.12.0",
     "react": "16.8.6",
