@@ -2,7 +2,7 @@
 
 > A buy button, a cart, a checkout, a customer login. All without writing a single line of JavaScript!
 
-[Read more about Shopkit](https://www.moltin.com/commerce-solutions/embeddable-cart)
+[Read more about Shopkit](https://www.moltin.com/commerce-solutions/embeddable-cart) | [Demo](https://ll2xzzoo79.codesandbox.io)
 
 ## Installation
 
@@ -163,3 +163,10 @@ Shopkit versioning is based on semver and the angular commit convention. Releasi
 We should recommend users use the specific version `unpkg` url, e.g. `https://unpkg.com/@moltin/shopkit@1.0.0/index.js`.
 
 You can optionally deploy to `btn.moltin.com` which should be used for those wanting to develop on master. You can deploy by running `yarn deploy`.
+
+## Demo
+
+
+You're able to try this yourself by visiting https://ll2xzzoo79.codesandbox.io and using the Stripe test card `4242 4242 4242 4242` during checkout.
+
+You can also use the discount code `SAVE50` during checkout to save!
