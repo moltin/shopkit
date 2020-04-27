@@ -1,8 +1,8 @@
-# Moltin Embeddable Cart + Checkout
+# Elastic Path Commerce Cloud Embeddable Cart + Checkout
 
 > A buy button, a cart, a checkout, a customer login. All without writing a single line of JavaScript!
 
-[Read more about Shopkit](https://www.moltin.com/commerce-solutions/embeddable-cart) | [Demo](https://ll2xzzoo79.codesandbox.io)
+[Read more about Shopkit](https://www.elasticpath.com/product/application-library/embedded-commerce-details) | [Demo](https://ll2xzzoo79.codesandbox.io)
 
 ## Installation
 
@@ -10,7 +10,7 @@ You can use Shopkit anywhere you can insert custom HTML.
 
 ### Step 1
 
-First, you'll need to enable Stripe as a payment gateway via the [Dashboard UI](https://dashboard.moltin.com/app/settings/gateways/stripe) or [API](https://docs.moltin.com/api/payments/gateways/configure-stripe) directly.
+First, you'll need to enable Stripe as a payment gateway via the [Dashboard UI](https://dashboard.elasticpath.com/app/settings/gateways/stripe) or [API](https://docs.moltin.com/api/payments/gateways/configure-stripe) directly.
 
 You'll find your Stripe `publishable key` and `secret key` via the [Stripe Dashboard](https://dashboard.stripe.com).
 
@@ -18,7 +18,7 @@ You'll find your Stripe `publishable key` and `secret key` via the [Stripe Dashb
 
 ### Step 2
 
-Add the following snippet before the `</body>` tag on your website to enable Shopkit. You'll want to populate your Moltin `client id` and Stripe `publishable key` here.
+Add the following snippet before the `</body>` tag on your website to enable Shopkit. You'll want to populate your Elastic Path Commerce Cloud `client id` and Stripe `publishable key` here.
 
 ```html
 <script
@@ -46,7 +46,7 @@ Add a Buy button with the following code:
 <span class="moltin-buy-button" data-moltin-product-id="..."></span>
 ```
 
-You can change the buttons behaviour with additional properties. You can also use the button with a custom product outside of Moltin.
+You can change the buttons behaviour with additional properties. You can also use the button with a custom product outside of Elastic Path Commerce Cloud.
 
 ## Buy Button
 
@@ -88,7 +88,7 @@ You can automatically open the cart once an item has been added by providing a `
 
 ### Custom item
 
-You can add custom items to the cart that don't belong inside your Moltin catalog.
+You can add custom items to the cart that don't belong inside your Elastic Path Commerce Cloud catalog.
 
 Simply omit the `data-moltin-product-id` attribute and add all of the following attributes:
 
@@ -154,7 +154,7 @@ Somewhere in your `<head>` you will want to add the following:
 2. Use `yarn` to install dependencies
 3. Run `yarn dev` and webpack will open `example/index.html`
 
-The example playground uses the `demo.moltin.com` API keys.
+The example playground uses the `demo.elasticpath.com` API keys.
 
 ## Publishing
 
