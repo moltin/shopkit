@@ -1,8 +1,14 @@
+<img src="https://www.elasticpath.com/themes/custom/bootstrap_sass/logo.svg" alt="" width="400" />
+
 # Elastic Path Commerce Cloud Embeddable Cart + Checkout
 
 > A buy button, a cart, a checkout, a customer login. All without writing a single line of JavaScript!
 
-[Read more about Shopkit](https://www.elasticpath.com/product/application-library/embedded-commerce-details) | [Demo](https://ll2xzzoo79.codesandbox.io)
+[Demo](https://ll2xzzoo79.codesandbox.io)
+
+## Documentation
+
+- [Shopkit Embeddable Cart + Checkout](https://www.elasticpath.com/product/application-library/embedded-commerce-details)
 
 ## Installation
 
@@ -164,9 +170,7 @@ We should recommend users use the specific version `unpkg` url, e.g. `https://un
 
 You can optionally deploy to `btn.moltin.com` which should be used for those wanting to develop on master. You can deploy by running `yarn deploy`.
 
-## Demo
+## Terms And Conditions
 
-
-You're able to try this yourself by visiting https://ll2xzzoo79.codesandbox.io and using the Stripe test card `4242 4242 4242 4242` during checkout.
-
-You can also use the discount code `SAVE50` during checkout to save!
+- Any changes to this project must be reviewed and approved by the repository owner. For more information about contributing, see the [Contribution Guide](https://github.com/moltin/shopkit/blob/master/.github/CONTRIBUTING.md).
+- For more information about the license, see [MIT License](https://github.com/moltin/shopkit/blob/master/LICENSE).
