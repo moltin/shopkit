@@ -2,6 +2,11 @@
 
 # Elastic Path Commerce Cloud Embeddable Cart + Checkout
 
+[![Stable Branch](https://img.shields.io/badge/stable%20branch-master-blue.svg)](https://github.com/moltin/shopkit)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/moltin/shopkit/issues)
+[![follow on Twitter](https://img.shields.io/twitter/follow/elasticpath?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=elasticpath)
+
 > A buy button, a cart, a checkout, a customer login. All without writing a single line of JavaScript!
 
 [Demo](https://ll2xzzoo79.codesandbox.io)
