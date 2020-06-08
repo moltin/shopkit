@@ -9,7 +9,7 @@
 
 > A buy button, a cart, a checkout, a customer login. All without writing a single line of JavaScript!
 
-[Demo](https://ll2xzzoo79.codesandbox.io)
+[Demo](https://deploy-preview-126--gatsby-demo-store.netlify.app/)
 
 ## Documentation
 
