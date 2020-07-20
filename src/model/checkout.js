@@ -14,6 +14,7 @@ export default {
     async (
       _,
       {
+        customerId,
         customer: initialCustomer,
         shipping_address,
         billing_address = shipping_address
@@ -30,7 +31,7 @@ export default {
       }
 
       const createCustomer = customer && customer.password
-      let customerId = customer && customer.id
+
 
       if (createCustomer) {
         const { data: newCustomer } = await api.post(`customers`, {

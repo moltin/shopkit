@@ -78,11 +78,6 @@ export default function Header({ route }) {
           </SVG>
         )}
       </ActionButton>
-
-      {loggedIn && <p>Logged in</p>}
-
-      {/* <button onClick={goToCart}>Cart ({count})</button>
-            <button onClick={goToOrders}>Previous Orders</button> */}
     </StyledHeader>
   )
 }

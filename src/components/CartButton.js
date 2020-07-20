@@ -14,8 +14,8 @@ function CartButton({ moltinText, moltinShowTotal }) {
   } = useActions(actions => actions)
 
   const [cartId, setCartId] = useLocalStorage('mcart', createCartIdentifier())
-  // const [customerToken, setCustomerToken] = useLocalStorage('mtoken', null)
-  // const [customerId, setCustomerId] = useLocalStorage('mcustomer', null)
+  const [customerToken, setCustomerToken] = useLocalStorage('mtoken', null)
+  const [customerId, setCustomerId] = useLocalStorage('mcustomer', null)
 
   const btnSuffix =
     subTotal || count
@@ -23,8 +23,7 @@ function CartButton({ moltinText, moltinShowTotal }) {
       : null
 
   useEffect(() => {
-    // initialize({ cartId, customerToken, customerId })
-    initialize({ cartId })
+    initialize({ cartId, customerToken, customerId })
     setCartId(cartId)
   }, [cartId])
 
