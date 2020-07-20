@@ -79,7 +79,7 @@ export default function Header({ route }) {
         )}
       </ActionButton>
 
-      {loggedIn && <p>Logged in</p>}
+      {/*{loggedIn && <p>Logged in</p>}*/}
 
       {/* <button onClick={goToCart}>Cart ({count})</button>
             <button onClick={goToOrders}>Previous Orders</button> */}

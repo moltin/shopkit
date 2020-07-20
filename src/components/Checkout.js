@@ -38,6 +38,7 @@ function Checkout({ stripe }) {
   const [order, setOrder] = useState(null)
   const { route } = useStore(({ modal }) => modal)
   const { id: cartId, subTotal } = useStore(({ cart }) => cart)
+  const { id: customerId } = useStore(({ user }) => user)
   const { createOrder, payForOrder, setDirty } = useActions(
     ({ checkout }) => checkout
   )
@@ -65,6 +66,7 @@ function Checkout({ stripe }) {
 
     const { shipping_address } = values
 
+    values = {customerId, ...values}
     try {
       order = await createOrder(values)
       console.log({ order })
