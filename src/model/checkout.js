@@ -32,6 +32,7 @@ export default {
 
       const createCustomer = customer && customer.password
 
+
       if (createCustomer) {
         const { data: newCustomer } = await api.post(`customers`, {
           type: 'customer',
