@@ -22,7 +22,7 @@
   "author": "Jamie Barton <jamie@notrab.dev>",
   "license": "MIT",
   "dependencies": {
-    "@moltin/request": "2.0.0",
+    "@moltin/request": "2.0.2",
     "algolia-places-react": "1.4.1",
     "arrive": "2.4.1",
     "easy-peasy": "2.1.6",
