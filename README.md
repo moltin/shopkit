@@ -1,4 +1,4 @@
-<img src="https://www.elasticpath.com/themes/custom/bootstrap_sass/logo.svg" alt="" width="400" />
+<img src="https://www.elasticpath.com/themes/custom/bootstrap_sass/logo.svg" alt="" width="400" /> 
 
 # Elastic Path Commerce Cloud Embeddable Cart + Checkout
 
