@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Build app
-        run: yarn build
+        run: yarn prod-build
       - name: Remove node_modules
         run: rm -rf node_modules
       - name: Release
