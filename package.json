@@ -28,8 +28,8 @@
     "arrive": "2.4.1",
     "easy-peasy": "2.1.6",
     "final-form": "4.20.1",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
     "react-final-form": "4.1.0",
     "react-stripe-elements": "2.0.3",
     "styled-components": "4.4.1"
