@@ -45,7 +45,7 @@
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "prop-types": "15.7.2",
     "terser-webpack-plugin": "1.4.4",
-    "webpack": "4.30.0",
+    "webpack": "4.44.1",
     "webpack-cli": "3.3.2",
     "webpack-dev-server": "3.11.0",
     "webpack-obfuscator": "0.18.0",
