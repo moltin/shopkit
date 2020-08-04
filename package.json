@@ -11,6 +11,7 @@
     "dev": "webpack-dev-server",
     "deploy": "now --target=production",
     "build": "webpack",
+    "prod-build": "webpack --mode=production",
     "now-build": "webpack --mode=production",
     "semantic-release": "semantic-release"
   },
