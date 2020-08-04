@@ -51,9 +51,6 @@
     "webpack-obfuscator": "0.18.0",
     "semantic-release": "^17.1.1"
   },
-  "release": {
-    "branches": ["master", "next"]
-  },
   "publishConfig": {
     "access": "public"
   }
