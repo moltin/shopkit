@@ -45,7 +45,7 @@
     "mini-css-extract-plugin": "0.10.0",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "prop-types": "15.7.2",
-    "terser-webpack-plugin": "1.4.4",
+    "terser-webpack-plugin": "1.4.5",
     "webpack": "4.44.1",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.0",
