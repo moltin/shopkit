@@ -27,7 +27,8 @@ function init(document) {
   const {
     moltinClientId: client_id,
     moltinStripePublishableKey,
-    moltinCurrency: currency
+    moltinCurrency: currency,
+    moltinEndpointUrl: host
   } = script.dataset
 
   if (!moltinStripePublishableKey) {
@@ -47,7 +48,8 @@ function init(document) {
   const api = new MoltinClient({
     client_id,
     application: 'moltin-btn',
-    ...(currency && { currency })
+    ...(currency && { currency }),
+    ...(host && { host })
   })
 
   const store = createStore(model, {
