@@ -49,7 +49,7 @@
     "webpack": "4.44.2",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.0",
-    "webpack-obfuscator": "0.28.5",
+    "webpack-obfuscator": "2.6.0",
     "semantic-release": "17.2.1"
   },
   "release": {
