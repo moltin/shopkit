@@ -1703,10 +1703,10 @@ ajv@^6.10.2, ajv@^6.12.2, ajv@^6.12.3:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-algolia-places-react@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/algolia-places-react/-/algolia-places-react-1.6.0.tgz#b915a9cb749ebeba39c5945b3feb34c291c701e2"
-  integrity sha512-IrBVvc/q3tB7mVkWSACR9DNTu4BaSexFo755qbRYkbHKhAxbzr85NgfztAPLJuyoX3ildoIqwyWJ0wqbOtKgMQ==
+algolia-places-react@1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/algolia-places-react/-/algolia-places-react-1.6.1.tgz#4f33078183f664cc42b4ae45438e4896fba109c6"
+  integrity sha512-+TguN3QudkXbe6UKj8q40Yva4wtrdNhXJlcv1RD86Xi7znJcP8QBJhR/h/yvyNqO4G+otC03en0V96GAWTMQsw==
   dependencies:
     places.js "1.19.0"
     prop-types "^15.6.0"
