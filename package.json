@@ -50,7 +50,7 @@
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.1",
     "webpack-obfuscator": "0.28.5",
-    "semantic-release": "17.3.1"
+    "semantic-release": "17.3.7"
   },
   "release": {
     "branches": ["master", "next"]
