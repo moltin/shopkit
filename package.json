@@ -31,7 +31,7 @@
     "react": "16.14.0",
     "react-dom": "16.14.0",
     "react-final-form": "4.1.0",
-    "react-stripe-elements": "2.0.3",
+    "react-stripe-elements": "6.1.2",
     "styled-components": "4.4.1"
   },
   "devDependencies": {
