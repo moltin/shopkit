@@ -30,7 +30,7 @@
     "final-form": "4.20.4",
     "react": "16.14.0",
     "react-dom": "16.14.0",
-    "react-final-form": "4.1.0",
+    "react-final-form": "6.5.9",
     "react-stripe-elements": "2.0.3",
     "styled-components": "4.4.1"
   },
